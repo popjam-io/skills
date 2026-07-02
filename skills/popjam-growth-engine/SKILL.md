@@ -12,6 +12,9 @@ description: >-
   for a brand, product, or website — "make ads for X", "who is my target audience", "test this
   ad concept", "which segment should we scale", "build me a persona panel" — even if they never
   mention POPJAM, and even if they only give you a URL.
+license: MIT
+metadata:
+  author: POPJAM (https://popjam.io)
 ---
 
 # POPJAM Growth Engine

@@ -1,6 +1,9 @@
 ---
 name: brand-guideline-extraction
 description: Reverse-engineer a comprehensive brand style guide from a corpus of existing design assets (social posts, ad creatives, banners, decks, videos). Produces a structured guideline document plus a reusable "style prompt block" for on-brand AI image generation. Use this whenever the user wants brand guidelines, a style guide, design-language or "look and feel" analysis, brand DNA extraction, visual identity documentation, or wants AI-generated images to match an existing brand — even if they just say "analyze our creatives" or "make generations on-brand" and point at a folder of images.
+license: MIT
+metadata:
+  author: POPJAM (https://popjam.io)
 ---
 
 # Brand Guideline Extraction

@@ -1,7 +1,9 @@
 ---
 name: remotion-render-pitfalls
 description: POPJAM-specific render-breaking mistakes that fail our renderer (tsc, eslint, and Remotion render). Read this BEFORE writing animation source files. First-party supplement to the external remotion-best-practices skill.
+license: MIT
 metadata:
+  author: POPJAM (https://popjam.io)
   tags: remotion, validation, tsc, eslint, render, debugging, reliability, popjam
 ---
 

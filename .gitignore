@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+
+# Skill working dirs (created by skill runs, never committed)
+growth/
+work/

@@ -1,0 +1,40 @@
+{
+  "name": "popjam",
+  "owner": {
+    "name": "POPJAM",
+    "email": "doruk@popjam.io"
+  },
+  "metadata": {
+    "description": "Free agent skills for marketing, ads & creatives — by POPJAM.IO",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "popjam-skills",
+      "description": "Marketing, ads & creative skills: run a full ad-creation pipeline from a URL, build landing pages that convert, reverse-engineer brand guidelines from design assets, and avoid Remotion render pitfalls.",
+      "source": "./",
+      "strict": false,
+      "license": "MIT",
+      "author": {
+        "name": "POPJAM",
+        "url": "https://popjam.io"
+      },
+      "keywords": [
+        "marketing",
+        "ads",
+        "creatives",
+        "landing-pages",
+        "branding",
+        "personas",
+        "remotion"
+      ],
+      "category": "marketing",
+      "skills": [
+        "./skills/popjam-growth-engine",
+        "./skills/award-landing-page",
+        "./skills/brand-guideline-extraction",
+        "./skills/remotion-render-pitfalls"
+      ]
+    }
+  ]
+}

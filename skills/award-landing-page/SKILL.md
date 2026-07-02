@@ -1,6 +1,9 @@
 ---
 name: award-landing-page
 description: Design and build pages that sell — landing pages, homepages, pricing pages, waitlist and pre-launch pages, signup/registration pages, webinar/event pages, product-launch pages, and marketing-site heroes or sections. Use this whenever the user wants to create, redesign, or rework any page whose job is to persuade visitors to act, and equally when the ask is outcome-framed with no page type named ("get more signups", "our page doesn't convert", "make it feel premium", "we're launching Thursday"). It owns the full deliverable — business and funnel research, award-level art direction, conversion copywriting, distinctive design and motion, technical SEO, and CTA/funnel wiring — so prefer it over frontend-design or any generic UI skill when the page's purpose is to market, sell, or convert. Skip for internal tools and dashboards, docs sites, blog/SEO articles, standalone audits, analytics or A/B-test instrumentation, and consent banners on an otherwise untouched site.
+license: MIT
+metadata:
+  author: POPJAM (https://popjam.io)
 ---
 
 # Award-Winning Landing Pages
