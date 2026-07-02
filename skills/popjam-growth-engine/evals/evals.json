@@ -1,0 +1,56 @@
+{
+  "skill_name": "popjam-growth-engine",
+  "evals": [
+    {
+      "id": 0,
+      "name": "url-to-strategy",
+      "prompt": "I want to market Notion (notion.so). Research the brand and product from the site, find the best-converting audience segments, build a synthetic persona panel for the strongest segment, and draft ad angles and hooks for Meta feed and TikTok. Don't generate any media yet — I want to review strategy first.",
+      "expected_output": "A campaign state directory with a brand dossier, 3+ scored audience segments with a pick + rationale, 5+ distinct personas as structured JSON for the top segment, and platform-specific ad concepts (angle/hook/copy) traceable to segments.",
+      "files": [],
+      "assertions": [
+        "Creates a campaign state directory containing brand.json, audiences/, personas/, and strategy or concepts output (not just chat text)",
+        "brand.json includes name, language (BCP-47), tone, and colors extracted from the real Notion site (no placeholder lorem values)",
+        "At least 3 audience segment JSONs exist, each with a non-empty needs array and a 16-trait archetype with values in [0,1]",
+        "At least 5 persona JSONs exist for the chosen segment, each with exactly the 12 behavioral trait floats in [0,1] and age within the audience's age range",
+        "The persona panel is bias-corrected: it includes at least one clearly skeptical/struggling persona rather than all enthusiastic fans",
+        "Ad concepts specify platform and format, include headline/body/call_to_action, and map to a named angle/hook tied to a specific audience",
+        "No claims are fabricated: any statistic, user count, or price in the ad copy traces to researched material in research.md or the site",
+        "Respects the no-media instruction: no image/video generation attempted; concept media blocks are empty/null"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "simulate-and-iterate",
+      "prompt": "My campaign state is in ./growth/ridge-cold-brew — brand, one audience with 6 personas, and two ad concepts (con-hustle-01 and con-ritual-01) as creative briefs. Run the full persona simulation panel on both concepts, score and aggregate the reactions, tell me which concept wins and why, and then create 2 improved variants of the losing concept that address the personas' actual objections.",
+      "expected_output": "Per-persona reactions (6 personas x 2 concepts) with valid labels and in-range scores, deterministically computed engagement scores, an aggregate comparison naming a winner, and 2 variant concepts linked via og_id whose reasoning cites persona objections.",
+      "files": ["growth/ridge-cold-brew"],
+      "assertions": [
+        "simulations/<id>/reactions.json exists for BOTH concepts with exactly 6 reactions each, persona_ids matching the fixture personas one-to-one",
+        "Every reaction uses engagement in {Will Click, Might Click, No Interest} and sentiment in {Positive, Neutral, Negative}, and sentiment is consistent with engagement (no Positive + No Interest pairs without justification)",
+        "Every reaction has 6 integer scoring dimensions 0-10 and feedback written in-character (references the persona's stated traits/situation, not generic)",
+        "engagement_score values are deterministically correct: re-running scripts/score.py score on the reactions reproduces the stored scores exactly",
+        "insight.json exists per concept; its calculated fields (sentiment counts, mean engagement_score, dimension_averages, consensus_level) match re-running score.py aggregate",
+        "Insight narrative cites dimension averages numerically and recommended_actions target the weakest dimensions",
+        "A winner is declared and is the concept with the higher aggregate engagement_score",
+        "Exactly 2 variant concept JSONs exist with og_id set to the losing concept's id and a non-empty reasoning field that cites specific persona objections from the reactions",
+        "Variants were re-simulated against the same 6-persona panel OR the response explicitly proposes re-simulation as the next step (no silent skip)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "cold-start-full-funnel",
+      "prompt": "make ads for https://www.liquiddeath.com — figure out who actually converts, and get me real creatives i can test. (Constraint for this test run: cap media generation at 2 images total and no video.)",
+      "expected_output": "Full pipeline run: brand research, 2+ audience segments explored, persona panels, ad concepts, honest media phase (real generations within the cap, or an explicit statement that generation tooling is unavailable), simulation results, and a ranked recommendation of what to test first.",
+      "files": [],
+      "assertions": [
+        "Explores at least 2 distinct audience segments (not one obvious segment), with personas generated for the segments that were simulated",
+        "Ad concepts are grounded in actual Liquid Death brand research (irreverent tone reflected; no invented prices/stats)",
+        "Media phase is honest: every creative asset referenced in concept media blocks exists on disk or as a verifiable generation URL; if generation tooling was unavailable, that is stated explicitly and the pipeline continued on text concepts",
+        "Respects the 2-image cap: no more than 2 image generations attempted and no video generation",
+        "Simulation ran on the concepts (visual ones only with real media; text ones on copy) and produced insight aggregates via score.py, not hand-computed scores",
+        "A final leaderboard/ranking exists naming the segment + concept to test first, justified by persona feedback themes and dimension averages",
+        "log.md records the phase decisions so the run is resumable"
+      ]
+    }
+  ]
+}

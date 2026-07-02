@@ -1,0 +1,68 @@
+{
+  "skill_name": "award-landing-page",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "saas-trial-funnel",
+      "prompt": "I'm building Refold (refold.app) — it turns scattered customer feedback (support tickets, sales-call notes, app-store reviews) into a prioritized product roadmap. Target audience: heads of product at 20–200 person B2B SaaS companies. We have a 14-day free trial at /signup (no credit card) and a book-a-demo funnel at /demo for enterprise. Build the landing page — a single self-contained index.html (inline CSS/JS is fine). It needs to look genuinely exceptional, not like a template, and it needs to convert.",
+      "expected_output": "A single distinctive, polished index.html landing page with trial-focused primary CTA to /signup, secondary demo path to /demo, strong copy, animations with reduced-motion support, and complete SEO metadata.",
+      "files": [],
+      "expectations": [
+        "index.html exists and contains a <title> between 10 and 65 characters",
+        "Meta description present, 50-165 characters",
+        "Exactly one <h1> element",
+        "Open Graph tags og:title, og:description, and og:image are all present",
+        "A JSON-LD structured-data block is present and parses as valid JSON",
+        "Viewport meta tag present",
+        "Every <img> has an alt attribute",
+        "No lorem-ipsum/TODO placeholder text",
+        "prefers-reduced-motion is handled given the page uses CSS animations/transitions",
+        "A link/CTA to /signup exists (primary trial funnel)",
+        "A link/CTA to /demo exists (enterprise demo funnel)"
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "dtc-preorder-launch",
+      "prompt": "we're launching our new espresso machine 'Lume One' ($649, ships March, preorder with a $100 deposit at /preorder). audience is design-conscious home baristas. i need a launch landing page that drives preorders and also captures emails (form POST to /api/subscribe) from people who aren't ready to put money down. single self-contained html file called index.html please. make it feel like an award-winning product site — animations and all",
+      "expected_output": "A single premium product-launch index.html with /preorder as the primary CTA, an email-capture form posting to /api/subscribe, price and deposit clearly stated, award-level art direction and motion, and complete SEO metadata.",
+      "files": [],
+      "expectations": [
+        "index.html exists and contains a <title> between 10 and 65 characters",
+        "Meta description present, 50-165 characters",
+        "Exactly one <h1> element",
+        "Open Graph tags og:title, og:description, and og:image are all present",
+        "A JSON-LD structured-data block is present and parses as valid JSON",
+        "Viewport meta tag present",
+        "Every <img> has an alt attribute",
+        "No lorem-ipsum/TODO placeholder text",
+        "prefers-reduced-motion is handled given the page uses CSS animations/transitions",
+        "A link/CTA to /preorder exists (preorder funnel)",
+        "An email-capture form targeting /api/subscribe exists",
+        "Both the $649 price and the $100 deposit are stated on the page"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "local-service-seo",
+      "prompt": "Build a landing page for Northwind Tax Studio, a boutique tax advisory for freelancers and solo founders in Berlin. Primary goal: booked intro calls via https://calendly.com/northwind/intro. Secondary: capture emails in exchange for our '2026 freelancer tax checklist' download (form POST to /api/leads). The page is in English for the German market. One self-contained index.html. It should be able to rank for 'tax advisor berlin freelancers' — do the SEO properly, including structured data.",
+      "expected_output": "A single index.html for a local service business: primary CTA to the Calendly URL, lead-magnet form posting to /api/leads, local-SEO targeting (title/h1/copy mention tax + Berlin + freelancers), LocalBusiness + FAQPage structured data, polished distinctive design.",
+      "files": [],
+      "expectations": [
+        "index.html exists and contains a <title> between 10 and 65 characters",
+        "Meta description present, 50-165 characters",
+        "Exactly one <h1> element",
+        "Open Graph tags og:title, og:description, and og:image are all present",
+        "A JSON-LD structured-data block is present and parses as valid JSON",
+        "Viewport meta tag present",
+        "Every <img> has an alt attribute",
+        "No lorem-ipsum/TODO placeholder text",
+        "prefers-reduced-motion is handled given the page uses CSS animations/transitions",
+        "A link/CTA to https://calendly.com/northwind/intro exists (call-booking funnel)",
+        "A lead form targeting /api/leads exists",
+        "Title and h1 target the local query (contain 'tax' and 'Berlin')",
+        "JSON-LD includes a local-business type (LocalBusiness/ProfessionalService/AccountingService)"
+      ]
+    }
+  ]
+}
