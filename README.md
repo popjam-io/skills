@@ -1,6 +1,6 @@
 # POPJAM Skills
 
-**Free, open-source agent skills for marketing, ads & creatives** — shared by the [POPJAM.IO](https://popjam.io) team.
+**Free, open-source agent skills for marketing, ads & creatives**, shared by the [POPJAM.IO](https://popjam.io) team.
 
 These are distilled versions of the pipelines we run in production at POPJAM: brand research, audience discovery, synthetic persona panels, ad creative generation, engagement simulation, landing pages that convert, and brand-guideline extraction. They work in Claude Code and any agent that supports the [Agent Skills](https://agentskills.io) standard (Cursor, Codex, Amp, opencode, …).
 
@@ -11,8 +11,8 @@ These are distilled versions of the pipelines we run in production at POPJAM: br
 | Skill | What it does |
 |---|---|
 | [**popjam-growth-engine**](skills/popjam-growth-engine) | Turn one website URL into tested ad creatives: brand research → audience segments → synthetic persona panel → ad angles → real creatives (image/video/animation) → deterministic engagement simulation → iteration. Ends with a leaderboard of who converts and why. |
-| [**award-landing-page**](skills/award-landing-page) | Design and build pages that sell — landing, pricing, waitlist, launch pages. Full deliverable: funnel research, art direction, conversion copywriting, distinctive design & motion, technical SEO, CTA wiring. |
-| [**brand-guideline-extraction**](skills/brand-guideline-extraction) | Reverse-engineer a complete brand style guide from a folder of design assets (posts, ads, banners, decks, videos) — including a reusable "style prompt block" for on-brand AI image generation. |
+| [**award-landing-page**](skills/award-landing-page) | Design and build pages that sell (landing, pricing, waitlist, launch pages). Full deliverable: funnel research, art direction, conversion copywriting, distinctive design & motion, technical SEO, CTA wiring. |
+| [**brand-guideline-extraction**](skills/brand-guideline-extraction) | Reverse-engineer a complete brand style guide from a folder of design assets (posts, ads, banners, decks, videos), including a reusable "style prompt block" for on-brand AI image generation. |
 | [**remotion-render-pitfalls**](skills/remotion-render-pitfalls) | Render-breaking [Remotion](https://remotion.dev) mistakes that pass `tsc` + `eslint` but crash at render time. Battle-tested against POPJAM's production render pipeline; useful for any strict Remotion setup. |
 
 ## Install
@@ -29,12 +29,14 @@ npx skills add popjam-io/skills
 npx skills add popjam-io/skills --skill popjam-growth-engine
 ```
 
-### Claude Code — plugin marketplace
+### Claude Code plugin marketplace
 
 ```
 /plugin marketplace add popjam-io/skills
 /plugin install popjam-skills@popjam
 ```
+
+Installing the plugin also connects the [POPJAM MCP server](#hosted-mcp-server), so the hosted campaign tools show up in your session (browser sign-in on first use).
 
 ### Manual (any agent)
 
@@ -46,9 +48,23 @@ cp -r skills/skills/popjam-growth-engine ~/.claude/skills/   # personal, all pro
 # or into <your-project>/.claude/skills/ for a single project
 ```
 
+## Hosted MCP server
+
+These skills run POPJAM's pipelines inside your own agent. If you'd rather call POPJAM's managed engine directly, connect the **POPJAM MCP server**: a remote server that exposes the same campaign tools (brand research, audience discovery, persona panels, ad generation, simulation) as callable tools, running on our infrastructure with durable memory.
+
+Installing the plugin above already wires it up. To add it standalone in Claude Code:
+
+```bash
+claude mcp add --transport http popjam https://api.popjam.io/mcp
+```
+
+For Claude Desktop, claude.ai, Cursor, VS Code, and other clients, add `https://api.popjam.io/mcp` as a remote (streamable-HTTP) MCP server. Authentication is a one-time browser sign-in.
+
+Full tool list and setup guides: **[popjam.io/mcp](https://popjam.io/mcp)**
+
 ## Try it
 
-Once installed, just describe the outcome — the skills trigger themselves:
+Once installed, just describe the outcome and the skills trigger themselves:
 
 - *"Make ads for https://yourbrand.com"* → **popjam-growth-engine** runs the full pipeline
 - *"Who is my target audience?"* → audience segments + persona panel with evidence
@@ -56,14 +72,14 @@ Once installed, just describe the outcome — the skills trigger themselves:
 - *"Build a landing page for our launch on Thursday"* → **award-landing-page**
 - *"Extract brand guidelines from ./assets"* → **brand-guideline-extraction**
 
-Some phases of the growth engine generate real media. Image/video generation uses the [Higgsfield MCP](https://higgsfield.ai) and animations use [Remotion](https://remotion.dev) — if neither is available, the skill still delivers strategy and simulation on text concepts, honestly.
+Some phases of the growth engine generate real media. Image/video generation uses the [Higgsfield MCP](https://higgsfield.ai) and animations use [Remotion](https://remotion.dev). If neither is available, the skill still delivers strategy and simulation on text concepts, honestly.
 
 ## Repo structure
 
 ```
 skills/
 ├── popjam-growth-engine/
-│   ├── SKILL.md              # entry point — frontmatter + instructions
+│   ├── SKILL.md              # entry point: frontmatter + instructions
 │   ├── references/           # per-phase playbooks, loaded on demand
 │   ├── scripts/              # deterministic scoring (never let the LLM do math)
 │   ├── workflows/            # multi-agent fan-out templates
@@ -73,17 +89,17 @@ skills/
 └── remotion-render-pitfalls/
 ```
 
-Each skill follows the [Agent Skills specification](https://agentskills.io/specification): a `SKILL.md` with `name` + `description` frontmatter, and progressive disclosure — references are read only when their phase begins, keeping context lean.
+Each skill follows the [Agent Skills specification](https://agentskills.io/specification): a `SKILL.md` with `name` + `description` frontmatter, and progressive disclosure, where references are read only when their phase begins, keeping context lean.
 
 ## Why free?
 
-We build [POPJAM](https://popjam.io) — an AI marketing platform that runs these same pipelines as a product: brand onboarding from a URL, reusable audiences & persona panels, ad/content generation, persona simulation with scored leaderboards, and campaign iteration — with a team UI, asset storage, and integrations on top.
+We build [POPJAM](https://popjam.io), an AI marketing platform that runs these same pipelines as a product (brand onboarding from a URL, reusable audiences & persona panels, ad/content generation, persona simulation with scored leaderboards, and campaign iteration), plus a team UI, asset storage, and integrations on top.
 
 These skills are the "run it yourself in your agent" edition. If you'd rather have the whole loop managed for you (or your marketing team doesn't live in a terminal), [try POPJAM](https://popjam.io).
 
 ## Contributing
 
-Issues and PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Good contributions: failure cases the skills should handle, new reference playbooks, eval cases, and new marketing/creative skills.
+Issues and PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). Good contributions: failure cases the skills should handle, new reference playbooks, eval cases, and new marketing/creative skills.
 
 ## License
 
