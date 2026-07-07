@@ -18,47 +18,11 @@ metadata:
 POPJAM renders every animation through a strict pipeline: **`tsc --noEmit` →
 `eslint` → Remotion render**. If any stage fails, the whole render fails and the
 work is wasted. The mistakes below are the ones that actually break renders in
-production, ordered by how often they happen. Avoid all of them. Several are
-additionally enforced by a pre-render lint (`popjam.utils.render_lint`) that
-raises `ModelRetry` before a render is attempted — treat a lint message as a hard
-fix-it, not a suggestion.
+production, ordered by how often they happen. Avoid all of them.
 
 ---
 
-## 1. Never interpolate into a `transform` string (most common runtime crash)
-
-Remotion parses CSS transforms and chokes on interpolated `transform` template
-strings — most often `rotate`. This passes `tsc` and `eslint` but **crashes at
-render time** ("invalid rotate value" / `parseStringInterpolationComponent`).
-
-❌ WRONG — crashes the render:
-
-```tsx
-style={{ transform: `rotate(${-knobRotation + 30}deg)` }}
-style={{ transform: `scale(${s}) translateY(${y}px)` }}
-```
-
-✅ CORRECT — use individual CSS transform properties:
-
-```tsx
-style={{ rotate: `${-knobRotation + 30}deg` }}
-style={{ scale: s, translate: `0px ${y}px` }}
-```
-
-When you must combine transforms, set each property separately (`rotate`,
-`scale`, `translate`) rather than composing one `transform` string. Always feed
-`interpolate()` numbers, then attach the unit:
-
-```tsx
-const deg = interpolate(frame, [0, 30], [0, 90], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-return <div style={{ rotate: `${deg}deg` }} />;
-```
-
-*(Enforced by the pre-render lint.)*
-
----
-
-## 2. Declare or import every identifier (TS2304 "Cannot find name")
+## 1. Declare or import every identifier (TS2304 "Cannot find name")
 
 Every name you reference must be either imported or defined in the same scope.
 Recurrent offenders:
@@ -82,7 +46,7 @@ that isn't imported or declared in that file.
 
 ---
 
-## 3. Google Font imports must use the exact, installed module (TS2307)
+## 2. Google Font imports must use the exact, installed module (TS2307)
 
 `import { loadFont } from "@remotion/google-fonts/<Family>"` only resolves for
 font families that actually exist as modules **in this renderer** (underscores
@@ -90,10 +54,9 @@ for spaces, exact casing, e.g. `Roboto`, `Montserrat`, `Inter`, `Poppins`).
 Guessing a family name that isn't installed fails with
 `Cannot find module '@remotion/google-fonts/<Family>'`.
 
-> ⚠️ **`Space_Grotesk` does NOT resolve in our renderer.** It was every single
-> `TS2307 Cannot find module` failure over the last 14 days. Do not import it.
-> The pre-render lint blocks it. (If a different family also starts failing
-> TS2307, treat it the same way and fall back to the system stack below.)
+> ⚠️ **`Space_Grotesk` does NOT resolve in our renderer.** It has been the
+> single most common `TS2307 Cannot find module` failure. Do not import it.
+> Fall back to the system stack below.
 
 Safe approach:
 
@@ -107,39 +70,11 @@ const fontFamily = "'Inter', system-ui, -apple-system, Helvetica, Arial, sans-se
 ```
 
 For correct `loadFont()` usage (weights, subsets), see the `remotion-best-practices`
-skill's google-fonts guidance. *(Broken-family imports are caught by the
-pre-render lint.)*
+skill's google-fonts guidance.
 
 ---
 
-## 4. Use valid CSS value types (TS2322 "Type not assignable")
-
-React's `CSSProperties` types are strict. The recurring failure is
-`fontWeight`. When you `loadFont()` a google font, its typed weight union only
-contains the weights that font actually ships (commonly `"400" | "500" | "600" |
-"700"`), so requesting a heavier weight as a quoted string fails with e.g.
-`Type '"800"' is not assignable to type '"400" | "500" | "600" | "700"'`.
-
-❌ `fontWeight: "800"` / `fontWeight: "900"` (weight the loaded font doesn't ship)
-✅ `fontWeight: "700"` (an available weight) — or `fontWeight: "bold"` /
-   `fontWeight: 800` (number) — or request the weight explicitly:
-   `loadFont("normal", { weights: ["400", "800"] })`.
-
-The pre-render lint blocks quoted `"800"`/`"900"`. Same idea for other typed
-props: pass numbers where numbers are expected, and only use string literals the
-type allows.
-
----
-
-## 5. Don't add unknown style properties (TS2353)
-
-`Object literal may only specify known properties` means you put a non-CSS key
-(or a typo) inside a `style` object, or extra keys on a typed component prop.
-Keep `style` objects to real, camelCased CSS properties only.
-
----
-
-## 6. ASCII only in code (TS1127 "Invalid character")
+## 3. ASCII only in code (TS1127 "Invalid character")
 
 Smart quotes (`“ ” ‘ ’`), non-breaking spaces, em-dashes pasted into code, and
 other non-ASCII characters in source break the TypeScript parser. Use plain
@@ -148,7 +83,7 @@ like ad copy, just not in the code syntax itself.)
 
 ---
 
-## 7. Make render deterministic — avoid "Output file not found after render"
+## 4. Make render deterministic — avoid "Output file not found after render"
 
 A render that produces no output file usually means the composition threw or
 hung at render time. Guard against it:
@@ -157,7 +92,7 @@ hung at render time. Guard against it:
   component) runs during bundling — a throw there aborts the whole render.
 - **Bake all data into `<Composition defaultProps>`.** Do not fetch at render
   time; the renderer has no app network/auth context. Asset URLs must be public
-  HTTPS and already verified (`check_image`).
+  HTTPS and already verified.
 - **Pure functions of `frame`.** No `Date.now()`, `Math.random()` without a
   seed, timers, or DOM measurement that can vary — non-determinism causes
   intermittent render failures.
@@ -166,16 +101,14 @@ hung at render time. Guard against it:
 
 ---
 
-## 8. The `eslint` stage fails the render too — no IIFEs in JSX
+## 5. The `eslint` stage can fail the render
 
-`eslint` is a **hard stage** in the pipeline, not advisory: an eslint *error*
-fails the whole render exactly like a `tsc` error. Two rules recur in production
-(Logfire, 14d) and are 100% avoidable.
+`eslint` is a **stage** in the pipeline. Most eslint rules are warnings and
+do not block the render, but a few categories do:
 
-**`@eslint-react/unsupported-syntax` — no immediately-invoked function
-expressions (IIFEs) in JSX.** Wrapping inline logic in a self-calling function
-inside JSX is rejected ("IIFEs will not be optimized by React Compiler"). The
-pre-render lint blocks this.
+**IIFEs in JSX** — `@eslint-react/unsupported-syntax` rejects
+`{(() => { ... })()}` style IIFEs ("IIFEs will not be optimized by React
+Compiler").
 
 ❌ WRONG — fails eslint, fails the render:
 
@@ -206,24 +139,91 @@ This applies to every IIFE form: `{(() => {...})()}`, `{((x) => ...)(y)}`,
 `{(function () {...})()}`. (A module-scope IIFE like
 `const config = (() => {...})()` is fine — the rule is JSX-specific.)
 
-**`no-useless-assignment` — don't compute a value you never read.** A variable
-that is assigned but not used in any later statement fails eslint. This usually
-means a particle/wave/timeline calculation whose result you forgot to render, or
-a value you recompute inline instead of using the variable.
+**`no-useless-assignment`** — assigning a value you never read trips the rule.
+This usually means a particle/wave/timeline calculation whose result you
+forgot to render, or a value you recompute inline instead of using the variable.
 
 ❌ `const x = p.x + amp; return <div style={{ left: p.x }} />;` (`x` unused)
 ✅ Either use the variable (`left: x`) or delete the assignment.
+
+> **Note on preview parity.** The frontend live preview lints with
+> `eslint-plugin-only-warn` registered globally, so the same rule there is a
+> warning and the preview keeps rendering. The renderer's eslint matches this
+> behaviour. Warnings (severity 1) are surfaced back to the caller in the
+> render result for diagnostics, but they do not fail the render — only
+> severity-2 errors do. Treat the warnings as guidance for the *next* render,
+> not as a reason to re-render this turn.
+
+---
+
+## 6. Composition prop typing (avoids TS2322 "Type not assignable")
+
+`React.FC` on the root scene component must accept a permissive prop shape
+(`Record<string, unknown>`) and cast individual props inside. A typed prop
+interface on the root breaks `<Composition>`'s generic-typed `component` prop.
+Sub-components may use their own typed props freely.
+
+```tsx
+export const MainScene: React.FC<Record<string, unknown>> = (props) => {
+    const title = (props.title as string) || '';
+};
+```
+
+> If you see TS2322 errors pointing at the root component's prop type, this is
+> the fix.
+
+---
+
+## 7. Font must cover the content's language — language-specific glyphs and casing
+
+A font that renders Latin English fine can still drop or tofu glyphs for
+other languages, and more importantly, **case-folding rules differ per
+language**. Picking a font (or applying `.toUpperCase()`/`.toLowerCase()`)
+without checking the language produces broken, unprofessional output:
+
+- **Turkish:** uppercase `i` → `İ` (U+0130, dotted capital I), **not** `I`.
+  Lowercase `I` → `ı` (U+0131, dotless i), **not** `i`. The characters `İ`/`ı`
+  are distinct code points; most Latin fonts omit them or render a generic
+  fallback. Also check `ğ ş ç ö ü`.
+- **German:** uppercase `ß` → `ẞ` (U+1E9E) or `SS` depending on style; `ä ö ü`.
+- **Nordic:** `æ ø å` / `Æ Ø Å`.
+- **Vietnamese:** `đ ơ ư` and precomposed diacritics that many Latin fonts lack.
+- **Arabic / Hebrew / Cyrillic / CJK:** require fonts with the matching script
+  coverage; do not assume a Latin family includes them.
+
+Rules:
+
+1. **Check the content language before choosing the font.** If `loadFont()`
+   accepts a `subsets` option, include the matching subset (e.g. `latin-ext`,
+   `vietnamese`, `cyrillic`); if unsure, request **all subsets** rather than
+   the default `latin` only.
+2. **Never call `.toUpperCase()` / `.toLowerCase()` blindly** — use a
+   language-aware transform (or pass the already-cased string in from the
+   agent) so Turkish `i`→`İ` and `I`→`ı` are honored. JS `String.toUpperCase`
+   does **not** apply Turkish/Azeri casing rules.
+3. **Prefer a known wide-coverage family** (`Inter`, `Noto Sans`, `Roboto`,
+   `Open Sans`) over display/narrow fonts when the content has diacritics or
+   non-Latin characters. `Oswald`, `Playfair_Display`, etc. frequently lack
+   `latin-ext`.
+4. When in doubt, **system-ui** has broad coverage; fall back to it rather
+   than shipping a font that tofus the copy.
+
+This won't fail `tsc`/`eslint`, but it produces visibly broken renders that
+get rejected downstream.
 
 ---
 
 ## Pre-render self-check (run through this before `render_animation`)
 
-1. No interpolated `transform` strings — used `rotate`/`scale`/`translate` props.
-2. Every identifier is imported or declared (no stray `colors`, `interpolate`…).
-3. Every `@remotion/google-fonts/*` import is a real family (never `Space_Grotesk`), else system stack.
-4. `fontWeight` is an available weight / number, not `"800"`/`"900"`.
-5. `style` objects contain only real camelCased CSS keys.
-6. Code is ASCII-only (smart quotes live only inside rendered strings).
-7. No top-level throws; all data baked into `defaultProps`; render is pure.
-8. No IIFEs in JSX — lift inline logic into a `const`/helper above `return`;
+1. Every identifier is imported or declared (no stray `colors`, `interpolate`…).
+2. Every `@remotion/google-fonts/*` import is a real family (never
+   `Space_Grotesk`), else system stack.
+3. Code is ASCII-only (smart quotes live only inside rendered strings).
+4. No top-level throws; all data baked into `defaultProps`; render is pure.
+5. No IIFEs in JSX — lift inline logic into a `const`/helper above `return`;
    every variable you compute is actually read (no `no-useless-assignment`).
+6. Root scene component is typed `React.FC<Record<string, unknown>>` and casts
+   props inside.
+7. Font covers the content's language: matching `subsets` requested, language-
+   aware casing (no blind `.toUpperCase()` for Turkish `İ`/`ı`), fallback to a
+   wide-coverage family or `system-ui` if unsure.
