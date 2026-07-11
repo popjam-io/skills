@@ -183,28 +183,36 @@ full tsc + bundle + Chromium cycle. Adapted from POPJAM's animategen agent (rend
 pitfalls — the pipeline runs `tsc --noEmit` → `eslint` → render, and any failure fails the job):
 
 ```
-1. Never interpolate into a `transform` string (transform: `translateY(${y}px)` breaks the
-   renderer). Use individual CSS transform props instead — set `rotate`, `scale`, and
-   `translate` as separate keys.
-2. Import or declare every identifier you use — TS2304 is the most common failure.
-3. Google fonts: only import real `@remotion/google-fonts/<Family>` modules. Do not import
-   `@remotion/google-fonts/Space_Grotesk` — it does not resolve (use Inter/Roboto/Montserrat/
-   Poppins or a system font stack).
-4. fontWeight must be a number or a string no heavier than "700" (TS2322) — most families
-   don't ship 800/900.
-5. ASCII only in code — smart quotes/em-dashes break the parser. Display text with non-ASCII
+1. Import or declare every identifier you use — TS2304 is the most common failure.
+2. Google fonts: module names are PascalCase with NO underscores — `PlayfairDisplay`,
+   `OpenSans`, `SpaceGrotesk`, never `Playfair_Display`/`Open_Sans`/`Space_Grotesk`
+   (underscore spellings fail TS2307 every time). If unsure a family exists, use a
+   system font stack. `loadFont()` takes the style string FIRST:
+   `loadFont("normal", { weights: ["400", "700"], subsets: ["latin"] })` — an options
+   object as the first argument fails TS2345.
+3. Transforms: only `scale`, `translate`, and `rotate` exist as standalone style props.
+   `skewY`, `scaleX`, `rotateX`, etc. are NOT CSS properties (TS2353/TS2561) — put them
+   inside ONE `transform` string, and never specify `transform` twice (TS2783).
+   Interpolated transform strings like transform: `translateY(${y}px)` are fine.
+4. No IIFEs in JSX — `{(() => {...})()}` fails eslint. Lift the logic into a `const`
+   above the `return`.
+5. Remotion hooks (`useCurrentFrame`/`useVideoConfig`) only at the top of components —
+   module scope or plain helpers crash the render at runtime.
+6. ASCII only in code — smart quotes/em-dashes break the parser. Display text with non-ASCII
    characters belongs in defaultProps strings, not code literals.
-6. Deterministic render: no top-level throws, no render-time fetches, no Math.random() or
+7. Deterministic render: no top-level throws, no render-time fetches, no Math.random() or
    Date.now(). Bake all data into <Composition defaultProps>.
+8. `<Composition>` `width`/`height`/`fps`/`durationInFrames` are literal integers —
+   never constants or expressions (tooling parses them statically).
 ```
 
 Quick sweep before rendering:
 
 ```bash
-grep -rn 'transform: `' src/                 # rule 1: interpolated transform strings
-grep -rn '@remotion/google-fonts' src/       # rule 3: verify each family import
-grep -rnE 'fontWeight: ?["'\'']?[89]00' src/ # rule 4: heavy weights
-grep -rn '{(() =>' src/                      # IIFE inside JSX — extract to a component
+grep -rn 'google-fonts/[A-Za-z0-9]*_' src/   # rule 2: underscore font modules (always broken)
+grep -rn 'loadFont({' src/                   # rule 2: options object passed as first arg
+grep -rnE '(skew[XY]?|scale[XYZ]|rotate[XYZ]|translate[XYZ]) ?:' src/ # rule 3: fake standalone props
+grep -rn '{(() =>' src/                      # rule 4: IIFE inside JSX — extract to a component
 grep -rhoE 'https?://[^"'\''` )]+' src/ | sort -u   # feed each into the curl -I preflight
 ```
 

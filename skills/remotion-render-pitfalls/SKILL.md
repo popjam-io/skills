@@ -46,22 +46,27 @@ that isn't imported or declared in that file.
 
 ---
 
-## 2. Google Font imports must use the exact, installed module (TS2307)
+## 2. Google Font module names are PascalCase with NO underscores (TS2307)
 
-`import { loadFont } from "@remotion/google-fonts/<Family>"` only resolves for
-font families that actually exist as modules **in this renderer** (underscores
-for spaces, exact casing, e.g. `Roboto`, `Montserrat`, `Inter`, `Poppins`).
-Guessing a family name that isn't installed fails with
-`Cannot find module '@remotion/google-fonts/<Family>'`.
+`import { loadFont } from "@remotion/google-fonts/<Family>"` resolves only when
+`<Family>` is the family name **concatenated in PascalCase — spaces removed,
+never replaced with underscores**:
 
-> ⚠️ **`Space_Grotesk` does NOT resolve in our renderer.** It has been the
-> single most common `TS2307 Cannot find module` failure. Do not import it.
-> Fall back to the system stack below.
+| Font | ✅ Correct module | ❌ Fails TS2307 |
+|---|---|---|
+| Playfair Display | `PlayfairDisplay` | `Playfair_Display` |
+| Open Sans | `OpenSans` | `Open_Sans` |
+| Space Grotesk | `SpaceGrotesk` | `Space_Grotesk` |
+| Roboto | `Roboto` | — |
+
+> ⚠️ Underscore spellings (`Playfair_Display`, `Space_Grotesk`) have been the
+> single most common `TS2307 Cannot find module` failure in production. There
+> is **no** installed module with an underscore in its name.
 
 Safe approach:
 
-- Stick to confirmed-working families: `Inter`, `Roboto`, `Montserrat`,
-  `Poppins`, `Open_Sans`, `Lato`, `Oswald`, `Playfair_Display`.
+- Confirmed-working families: `Inter`, `Roboto`, `Montserrat`, `Poppins`,
+  `OpenSans`, `Lato`, `Oswald`, `PlayfairDisplay`, `SpaceGrotesk`.
 - If unsure a family is available, **use a system font stack instead** — never
   risk a missing module:
 
@@ -69,8 +74,19 @@ Safe approach:
 const fontFamily = "'Inter', system-ui, -apple-system, Helvetica, Arial, sans-serif";
 ```
 
-For correct `loadFont()` usage (weights, subsets), see the `remotion-best-practices`
-skill's google-fonts guidance.
+**`loadFont()` signature (TS2345).** The FIRST argument is the style string;
+options come second. Passing the options object first fails `tsc`:
+
+```tsx
+// ❌ WRONG — TS2345
+const { fontFamily } = loadFont({ weights: ["400", "700"], subsets: ["latin"] });
+
+// ✅ CORRECT
+const { fontFamily } = loadFont("normal", { weights: ["400", "700"], subsets: ["latin"] });
+```
+
+For deeper `loadFont()` guidance (weights, subsets), see the
+`remotion-best-practices` skill's google-fonts rule.
 
 ---
 
@@ -213,11 +229,75 @@ get rejected downstream.
 
 ---
 
+## 8. Only `scale` / `translate` / `rotate` exist as standalone style props (TS2353 / TS2561 / TS2783)
+
+CSS has exactly three standalone transform properties: `scale`, `translate`,
+and `rotate`. Everything else — `scaleX`, `scaleY`, `skew`, `skewX`, `skewY`,
+`rotateX`, `rotateY`, `rotateZ`, `translateX`, `translateY` — is **not** a CSS
+property and fails `tsc` when used as a style key ("Object literal may only
+specify known properties"). Put those inside a single `transform` string:
+
+```tsx
+// ❌ WRONG — TS2353/TS2561: 'skewY' / 'scaleX' do not exist in Properties
+style={{ skewY: `${tilt}deg`, scaleX: stretch }}
+
+// ✅ CORRECT — one transform string for anything beyond scale/translate/rotate
+style={{ transform: `skewY(${tilt}deg) scaleX(${stretch})` }}
+
+// ✅ ALSO CORRECT — the three real standalone props
+style={{ scale: String(s), translate: `0px ${y}px`, rotate: `${r}deg` }}
+```
+
+Never set both a standalone prop AND `transform`, and never specify `transform`
+twice in one object (TS2783 "'transform' is specified more than once") — merge
+every function into a single `transform` string.
+
+---
+
+## 9. Remotion hooks only inside components rendered by the Composition
+
+`useCurrentFrame()` / `useVideoConfig()` are React hooks. Calling them at
+module scope, inside a plain helper function, or inside a `.map()` callback
+that isn't a component crashes the render at runtime
+("useCurrentFrame() can only be called inside a component that was rendered by
+Remotion"). `tsc` and `eslint` do NOT catch every case — the render just dies.
+
+```tsx
+// ❌ WRONG — module scope
+const frame = useCurrentFrame();
+
+// ❌ WRONG — plain helper invoked from JSX
+const barHeight = (i: number) => interpolate(useCurrentFrame(), [0, 30], [0, i]);
+
+// ✅ CORRECT — call the hook ONCE at the top of the component, pass the value down
+const Scene: React.FC<Record<string, unknown>> = () => {
+  const frame = useCurrentFrame();
+  const barHeight = (i: number) => interpolate(frame, [0, 30], [0, i]);
+  ...
+};
+```
+
+---
+
+## 10. `<Composition>` numeric props must be literal numbers
+
+`width`, `height`, `fps`, and `durationInFrames` on the `<Composition>` element
+must be written as **literal integers** (`durationInFrames={450}`), never
+constants or expressions (`durationInFrames={TOTAL_FRAMES}`,
+`durationInFrames={15 * 30}`). POPJAM tooling statically parses these values to
+drive the frontend live-preview Player and stored metadata — an expression
+parses as the default (300 frames / 1080x1920) and the preview plays the wrong
+duration even though the MP4 renders fine. Compute the number yourself and
+write the result.
+
+---
+
 ## Pre-render self-check (run through this before `render_animation`)
 
 1. Every identifier is imported or declared (no stray `colors`, `interpolate`…).
-2. Every `@remotion/google-fonts/*` import is a real family (never
-   `Space_Grotesk`), else system stack.
+2. Every `@remotion/google-fonts/*` import is PascalCase with NO underscores
+   (`PlayfairDisplay`, not `Playfair_Display`) and a real installed family,
+   else system stack; `loadFont("normal", {...})` — style string first.
 3. Code is ASCII-only (smart quotes live only inside rendered strings).
 4. No top-level throws; all data baked into `defaultProps`; render is pure.
 5. No IIFEs in JSX — lift inline logic into a `const`/helper above `return`;
@@ -227,3 +307,9 @@ get rejected downstream.
 7. Font covers the content's language: matching `subsets` requested, language-
    aware casing (no blind `.toUpperCase()` for Turkish `İ`/`ı`), fallback to a
    wide-coverage family or `system-ui` if unsure.
+8. Transforms: only `scale`/`translate`/`rotate` as standalone style props —
+   `skewY`, `scaleX`, etc. go inside ONE `transform` string, never duplicated.
+9. `useCurrentFrame()`/`useVideoConfig()` called only at the top of components,
+   never module scope or plain helpers.
+10. `<Composition>` `width`/`height`/`fps`/`durationInFrames` are literal
+    integers, not constants or expressions.
