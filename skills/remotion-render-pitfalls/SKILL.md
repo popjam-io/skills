@@ -279,7 +279,18 @@ const Scene: React.FC<Record<string, unknown>> = () => {
 
 ---
 
-## 10. `<Composition>` numeric props must be literal numbers
+## 10. Inline styles only — no Tailwind / className utilities
+
+Style every element with inline `style={{ ... }}` objects. The server renderer
+happens to process Tailwind classes, but the in-app live preview does NOT — a
+`className="flex items-center gap-4"` creative looks correct in the final MP4
+while the user's live preview shows unstyled content. Inline styles render
+identically in both. (Using `className` as a semantic hook is fine; just never
+rely on it for styling.)
+
+---
+
+## 11. `<Composition>` numeric props must be literal numbers
 
 `width`, `height`, `fps`, and `durationInFrames` on the `<Composition>` element
 must be written as **literal integers** (`durationInFrames={450}`), never
@@ -311,5 +322,7 @@ write the result.
    `skewY`, `scaleX`, etc. go inside ONE `transform` string, never duplicated.
 9. `useCurrentFrame()`/`useVideoConfig()` called only at the top of components,
    never module scope or plain helpers.
-10. `<Composition>` `width`/`height`/`fps`/`durationInFrames` are literal
+10. All styling is inline `style={{ ... }}` — no Tailwind/className utilities
+    (the live preview doesn't process them; the render does — they'd diverge).
+11. `<Composition>` `width`/`height`/`fps`/`durationInFrames` are literal
     integers, not constants or expressions.
