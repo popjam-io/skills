@@ -79,14 +79,36 @@ options come second. Passing the options object first fails `tsc`:
 
 ```tsx
 // ❌ WRONG — TS2345
-const { fontFamily } = loadFont({ weights: ["400", "700"], subsets: ["latin"] });
+const { fontFamily } = loadFont({ weights: ["400", "700"] });
 
 // ✅ CORRECT
-const { fontFamily } = loadFont("normal", { weights: ["400", "700"], subsets: ["latin"] });
+const { fontFamily } = loadFont("normal", { weights: ["400", "700"] });
 ```
 
-For deeper `loadFont()` guidance (weights, subsets), see the
-`remotion-best-practices` skill's google-fonts rule.
+**Never pass a `subsets` option (pre-render lint blocks it).** Each requested
+subset becomes a `FontFace` clipped to that subset's unicode-range, so
+`subsets: ["latin"]` drops every latin-ext glyph — Turkish `Ğ ğ İ Ş ş`,
+Estonian `š ž`, Romanian `ă ț`, … render in a FALLBACK font in the final MP4
+while the live preview (which always loads every subset) shows the brand font.
+Omitting `subsets` loads all subsets the family ships and matches the preview
+exactly; keep `weights` to limit download size.
+
+```tsx
+// ❌ WRONG — Turkish İ/ğ/ş silently fall back to a different font in the MP4
+const { fontFamily } = loadFont("normal", { weights: ["400", "700"], subsets: ["latin"] });
+
+// ✅ CORRECT — all subsets load; glyph coverage matches the live preview
+const { fontFamily } = loadFont("normal", { weights: ["400", "700"] });
+```
+
+For deeper `loadFont()` guidance (weights), see the
+`remotion-best-practices` skill's google-fonts rule — but IGNORE the
+`subsets: ["latin"]` in its examples. That skill is synced verbatim from
+upstream `remotion-dev/skills` (we cannot patch it), and its examples target
+end-user websites where trimming subsets saves page weight. In POPJAM's
+server-side renderer the saving is irrelevant and the clipped unicode-range
+breaks localized copy — always omit `subsets` here; the pre-render lint
+rejects it either way.
 
 ---
 
@@ -209,10 +231,12 @@ without checking the language produces broken, unprofessional output:
 
 Rules:
 
-1. **Check the content language before choosing the font.** If `loadFont()`
-   accepts a `subsets` option, include the matching subset (e.g. `latin-ext`,
-   `vietnamese`, `cyrillic`); if unsure, request **all subsets** rather than
-   the default `latin` only.
+1. **Never pass `subsets` to `loadFont()`** — omit the option entirely so
+   every subset the family ships is loaded (`latin-ext`, `vietnamese`,
+   `cyrillic`, …). Restricting subsets clips glyph coverage to their
+   unicode-ranges and is the #1 cause of Turkish/Estonian characters
+   rendering in a fallback font in the MP4 while the preview looks correct.
+   (The pre-render lint blocks any `subsets:` option.)
 2. **Never call `.toUpperCase()` / `.toLowerCase()` blindly** — use a
    language-aware transform (or pass the already-cased string in from the
    agent) so Turkish `i`→`İ` and `I`→`ı` are honored. JS `String.toUpperCase`
@@ -315,9 +339,10 @@ write the result.
    every variable you compute is actually read (no `no-useless-assignment`).
 6. Root scene component is typed `React.FC<Record<string, unknown>>` and casts
    props inside.
-7. Font covers the content's language: matching `subsets` requested, language-
-   aware casing (no blind `.toUpperCase()` for Turkish `İ`/`ı`), fallback to a
-   wide-coverage family or `system-ui` if unsure.
+7. Font covers the content's language: NO `subsets` option on `loadFont()`
+   (all subsets must load — `subsets: ["latin"]` drops Turkish `İ ğ ş`),
+   language-aware casing (no blind `.toUpperCase()` for Turkish `İ`/`ı`),
+   fallback to a wide-coverage family or `system-ui` if unsure.
 8. Transforms: only `scale`/`translate`/`rotate` as standalone style props —
    `skewY`, `scaleX`, etc. go inside ONE `transform` string, never duplicated.
 9. `useCurrentFrame()`/`useVideoConfig()` called only at the top of components,
