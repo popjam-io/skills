@@ -1,0 +1,43 @@
+{
+ "skill_name": "ad-platform-safe-zones",
+ "evals": [
+  {
+   "id": 0,
+   "prompt": "We're about to push our story creatives to Instagram Reels and TikTok. Check whether this one passes the CURRENT platform safe zones, and tell me exactly what would need to move if it doesn't. File: /Users/dorukgezici/Downloads/30 Temmuz Aldın Aldın/30 Temmuz Aldın Aldın Ekstra/Elektirikli ev Aletleri/1080x1920px kopya 26-100.jpg — write your findings to findings.md in the output directory (include the zone numbers you used and where they come from).",
+   "expected_output": "",
+   "files": [],
+   "assertions": [
+    "findings.md exists in the outputs directory",
+    "Verdict clearly states the creative FAILS current Stories/Reels safe zones (bottom-zone violation)",
+    "Uses Meta's CURRENT bottom clear zone (35% / ~672px on 1080x1920) as the operative rule — not the outdated 20% / 340px / 250px figures",
+    "Gives concrete pixel guidance that lower content (second product / price / legal) must move above ~y=1248",
+    "Handles TikTok explicitly: separate TikTok zone numbers or the ~140px right-rail constraint"
+   ]
+  },
+  {
+   "id": 1,
+   "prompt": "Create a 1080x1920 story ad mockup for a Turkish coffee brand 'KahveKap' — headline 'GÜNÜN KAHVESİ', price '₺89', logo text 'KahveKap', and CTA 'Hemen Sipariş Ver'. Compose it with PIL (flat colors fine, no photos needed). It must be safe to run on BOTH Instagram Stories/Reels AND TikTok in-feed — no platform UI may cover any text. Save the final PNG as kahvekap_story.png in the output directory, plus evidence that it passes (a proof image and/or a written check).",
+   "expected_output": "",
+   "files": [],
+   "assertions": [
+    "kahvekap_story.png exists and is exactly 1080x1920",
+    "All four required text elements are visible: GÜNÜN KAHVESİ, ₺89, KahveKap, Hemen Sipariş Ver",
+    "All text/critical elements sit inside the Meta+TikTok union live band (x 65-940, y 269-1248) — verify by inspecting the image; background may bleed",
+    "Pass evidence provided in outputs (overlay/proof image or written check results with zone numbers)"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "I'm setting up a paid campaign for a retail client running on Meta (feed + stories + reels) and Google Demand Gen. Give me a spec sheet of every image asset we must deliver — exact sizes, aspect ratios, and the safe zones / margins for each — so our designer can build the export set. Save it as spec-sheet.md in the output directory.",
+   "expected_output": "",
+   "files": [],
+   "assertions": [
+    "spec-sheet.md exists in the outputs directory",
+    "9:16 story/reels asset listed with Meta's current safe zone: 14% top / 35% bottom / 6% sides (or pixel equivalents ~269/672/65 on 1080x1920)",
+    "Meta feed asset specified at 4:5 (1440x1800 recommended), not only 1:1",
+    "Google Demand Gen landscape listed as 1200x628 with 600x314 minimum",
+    "Demand Gen logo spec included (1200x1200 rec / 128x128 min) with Gmail circular-mask cropping mentioned"
+   ]
+  }
+ ]
+}
