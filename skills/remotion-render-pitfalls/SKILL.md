@@ -67,12 +67,31 @@ Safe approach:
 
 - Confirmed-working families: `Inter`, `Roboto`, `Montserrat`, `Poppins`,
   `OpenSans`, `Lato`, `Oswald`, `PlayfairDisplay`, `SpaceGrotesk`.
-- If unsure a family is available, **use a system font stack instead** — never
-  risk a missing module:
+- If unsure a family is available, **use a web-safe font stack instead** —
+  never risk a missing module:
 
 ```tsx
-const fontFamily = "'Inter', system-ui, -apple-system, Helvetica, Arial, sans-serif";
+const fontFamily = "Arial, Helvetica, system-ui, sans-serif";
 ```
+
+**A font-family stack may only LEAD with a font that actually exists in the
+renderer** (the pre-render lint enforces this). The live preview runs in the
+user's browser (macOS/Windows — every local font resolves); the MP4 renders in
+a Linux container. A stack whose first family the container lacks shows the
+real font in the preview and a silent substitute in the video — the classic
+"the render doesn't use the same fonts as the preview" bug. Rules:
+
+- ✅ Lead with the `fontFamily` returned by `loadFont()` (a loaded Google
+  font), a **web-safe family** (`Arial`, `Arial Black`, `Georgia`, `Impact`,
+  `Times New Roman`, `Trebuchet MS`, `Verdana`, `Comic Sans MS`,
+  `Courier New` — installed in the renderer image), or a generic
+  (`system-ui`, `sans-serif`).
+- ❌ Never lead with a Google family you did NOT load (`"Montserrat,
+  sans-serif"` without its `loadFont` import) — import
+  `@remotion/google-fonts/Montserrat` instead.
+- ❌ Never lead with an Apple/Windows-only family (`Helvetica Neue`,
+  `SF Pro`, `Segoe UI`, `Futura`, `Avenir`, `Gill Sans`) — the container
+  cannot ever have them.
 
 **`loadFont()` signature (TS2345).** The FIRST argument is the style string;
 options come second. Passing the options object first fails `tsc`:
@@ -332,7 +351,10 @@ write the result.
 1. Every identifier is imported or declared (no stray `colors`, `interpolate`…).
 2. Every `@remotion/google-fonts/*` import is PascalCase with NO underscores
    (`PlayfairDisplay`, not `Playfair_Display`) and a real installed family,
-   else system stack; `loadFont("normal", {...})` — style string first.
+   else a web-safe stack (`Arial, Helvetica, system-ui, sans-serif`);
+   `loadFont("normal", {...})` — style string first. Every font stack LEADS
+   with a loaded Google font, a web-safe family, or a generic — never an
+   unloaded/OS-only family.
 3. Code is ASCII-only (smart quotes live only inside rendered strings).
 4. No top-level throws; all data baked into `defaultProps`; render is pure.
 5. No IIFEs in JSX — lift inline logic into a `const`/helper above `return`;
