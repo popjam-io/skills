@@ -2,7 +2,7 @@
 
 **Free, open-source agent skills for marketing, ads & creatives**, shared by the [POPJAM.IO](https://popjam.io) team.
 
-These are distilled versions of the pipelines we run in production at POPJAM: brand research, audience discovery, synthetic persona panels, ad creative generation, engagement simulation, landing pages that convert, brand-guideline extraction, and ad-platform safe-zone validation. They work in Claude Code and any agent that supports the [Agent Skills](https://agentskills.io) standard (Cursor, Codex, Amp, opencode, …).
+These are distilled versions of the pipelines we run in production at POPJAM: brand research, audience discovery, synthetic persona panels, ad creative generation, engagement simulation, landing pages that convert, brand-guideline extraction, writing-style extraction, and ad-platform safe-zone validation. They work in Claude Code and any agent that supports the [Agent Skills](https://agentskills.io) standard (Cursor, Codex, Amp, opencode, …).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -13,6 +13,7 @@ These are distilled versions of the pipelines we run in production at POPJAM: br
 | [**popjam-growth-engine**](skills/popjam-growth-engine) | Turn one website URL into tested ad creatives: brand research → audience segments → synthetic persona panel → ad angles → real creatives (image/video/animation) → deterministic engagement simulation → iteration. Ends with a leaderboard of who converts and why. |
 | [**award-landing-page**](skills/award-landing-page) | Design and build pages that sell (landing, pricing, waitlist, launch pages). Full deliverable: funnel research, art direction, conversion copywriting, distinctive design & motion, technical SEO, CTA wiring. |
 | [**brand-guideline-extraction**](skills/brand-guideline-extraction) | Reverse-engineer a complete brand style guide from a folder of design assets (posts, ads, banners, decks, videos), including a reusable "style prompt block" for on-brand AI image generation. |
+| [**writing-style-extraction**](skills/writing-style-extraction) | Reverse-engineer a brand's verbal identity (voice, hooks, structure, CTAs, offer framing, emoji/hashtag policy, formality, language mix) from its existing captions, articles, ad copy and page copy, with a bundled stats script for the numbers and a per-channel "voice prompt block" for on-brand AI copywriting. |
 | [**ad-platform-safe-zones**](skills/ad-platform-safe-zones) | Current (2025–26, source-verified) safe-zone and canvas specs for ad creatives on Meta, TikTok, and Google placements, plus a bundled validator that checks finished images and renders overlay proofs. Catches the obsolete numbers everyone still uses — Meta's 9:16 bottom clear zone is now 35%, not 20%. |
 | [**remotion-render-pitfalls**](skills/remotion-render-pitfalls) | Render-breaking [Remotion](https://remotion.dev) mistakes that pass `tsc` + `eslint` but crash at render time. Battle-tested against POPJAM's production render pipeline; useful for any strict Remotion setup. |
 
@@ -72,6 +73,7 @@ Once installed, just describe the outcome and the skills trigger themselves:
 - *"Test this ad concept against our audience"* → persona simulation + scored leaderboard
 - *"Build a landing page for our launch on Thursday"* → **award-landing-page**
 - *"Extract brand guidelines from ./assets"* → **brand-guideline-extraction**
+- *"Figure out our brand voice from these captions and make the ad copy sound like us"* → **writing-style-extraction**
 - *"Will this creative get cropped or covered on Reels?"* → **ad-platform-safe-zones** validates it and renders an overlay proof
 
 Some phases of the growth engine generate real media. Image/video generation uses the [Higgsfield MCP](https://higgsfield.ai) and animations use [Remotion](https://remotion.dev). If neither is available, the skill still delivers strategy and simulation on text concepts, honestly.
@@ -88,6 +90,7 @@ skills/
 │   └── evals/                # eval suite the skill was validated against
 ├── award-landing-page/
 ├── brand-guideline-extraction/
+├── writing-style-extraction/
 ├── ad-platform-safe-zones/
 └── remotion-render-pitfalls/
 ```

@@ -1,0 +1,46 @@
+{
+ "skill_name": "writing-style-extraction",
+ "evals": [
+  {
+   "id": 0,
+   "prompt": "Here is an export of our last 60 Instagram captions and 12 blog posts (folder: ./corpus, with social/ and long_form/ subfolders). Figure out our brand voice and write it up so a freelancer could write for us next week without reading everything. Save the guideline as voice-guideline.md in the output directory and the prompt blocks as voice-prompt-blocks.md.",
+   "expected_output": "",
+   "files": [],
+   "assertions": [
+    "voice-guideline.md and voice-prompt-blocks.md exist in the outputs directory",
+    "Stats were produced by running scripts/text_stats.py (a stats.json exists in data/ or work/) rather than estimated by reading",
+    "Social and long-form are documented as separate systems with their own length, emoji/hashtag and CTA figures — not one averaged voice",
+    "Every rule carries an evidence count (e.g. '41/60 captions') or named corpus IDs",
+    "Statements are labeled Rule / Variation (with trigger) / Exception per the 70% / 30-70% / 30% thresholds",
+    "There is one voice prompt block per channel, compact, containing verbatim hook and CTA examples in the source language",
+    "The document ends with a coverage section naming what the corpus did not contain (ads, web, other languages, dates)"
+   ]
+  },
+  {
+   "id": 1,
+   "prompt": "Our Turkish e-commerce brand runs Meta ads and posts on Instagram, mostly in Turkish with some English. I've put 30 ad texts and 45 captions in ./texts as a JSONL (fields: text, channel, language, engagement). Tell me what our voice actually is — hooks, CTAs, how we frame discounts, emoji habits — and give me something I can paste into a prompt so generated ad copy sounds like us. Output to the output directory.",
+   "expected_output": "",
+   "files": [],
+   "assertions": [
+    "text_stats.py was run on the JSONL and its per-channel aggregates (cta_rate, hook_distribution, mean_emoji_count, mean_chars) are cited",
+    "Verbatim Turkish hooks and CTAs are quoted as evidence (not paraphrased or translated), with rule text in English",
+    "Offer framing (percentage vs absolute vs threshold) and urgency devices are documented per channel with counts",
+    "Language mix is reported per channel with counts and the prompt block states which language to write in and where English is used",
+    "Engagement was joined honestly: any 'top-tier posts do X' claim states the sample size and confounds",
+    "A compact voice prompt block for ads (and one for social) exists following the template: Voice / Attributes / Person-formality / Hook / Structure / Length / CTA / Offer framing / Emoji / Hashtags / Language / Never"
+   ]
+  },
+  {
+   "id": 2,
+   "prompt": "Make this generated LinkedIn post sound like our company. Our real posts are in ./our-posts (20 .txt files). Draft: 'We are thrilled to announce that our innovative platform now supports advanced analytics! Reach out to learn more.' Save the rewrite and a short explanation of what you changed and why to rewrite.md in the output directory.",
+   "expected_output": "",
+   "files": [],
+   "assertions": [
+    "rewrite.md exists in the outputs directory with the rewritten post",
+    "The corpus was actually analyzed (stats run + reading pass) before rewriting; the explanation cites specific corpus patterns (hook type, person, length, CTA wording, emoji/hashtag policy)",
+    "The rewrite's stats (length, hook type, person, CTA presence, emoji/hashtag counts) are compared against the corpus range, not just asserted to match",
+    "Generic-announcement tells ('thrilled to announce', 'innovative', 'reach out to learn more') are replaced only where the corpus shows the brand does not use them, with evidence"
+   ]
+  }
+ ]
+}
