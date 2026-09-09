@@ -40,6 +40,21 @@ npx skills add popjam-io/skills --skill popjam-growth-engine
 
 Installing the plugin also connects the [POPJAM MCP server](#hosted-mcp-server), so the hosted campaign tools show up in your session (browser sign-in on first use).
 
+### ChatGPT and Codex plugins
+
+This repository is also a portable Agent Plugins package. The root
+`plugin.json` and `mcp.json` bundle these skills with the hosted POPJAM MCP
+server; `.codex-plugin/plugin.json` and `.mcp.json` remain as compatibility
+fallbacks.
+
+Codex and other portable-plugin hosts can load the package directly. Local
+ChatGPT testing additionally requires registering the MCP endpoint in ChatGPT
+developer mode and mapping the account-specific `plugin_asdk_app...` technical
+ID in `.app.json`; that identifier is intentionally not committed. Public
+directory availability follows OpenAI's review and publication flow. See
+[SUBMISSION.md](SUBMISSION.md) for the submission-ready listing, review cases,
+and final portal checklist.
+
 ### Manual (any agent)
 
 Copy a skill directory into your agent's skills folder, e.g. for Claude Code:
@@ -57,10 +72,10 @@ These skills run POPJAM's pipelines inside your own agent. If you'd rather call 
 Installing the plugin above already wires it up. To add it standalone in Claude Code:
 
 ```bash
-claude mcp add --transport http popjam https://api.popjam.io/mcp
+claude mcp add --transport http popjam https://api.popjam.io/mcp/
 ```
 
-For Claude Desktop, claude.ai, Cursor, VS Code, and other clients, add `https://api.popjam.io/mcp` as a remote (streamable-HTTP) MCP server. Authentication is a one-time browser sign-in.
+For Claude Desktop, claude.ai, Cursor, VS Code, and other clients, add `https://api.popjam.io/mcp/` as a remote (streamable-HTTP) MCP server. Authentication is a one-time browser sign-in.
 
 Full tool list and setup guides: **[popjam.io/mcp](https://popjam.io/mcp)**
 

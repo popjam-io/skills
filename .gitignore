@@ -10,6 +10,9 @@ __pycache__/
 .idea/
 .vscode/
 
+# Account-specific ChatGPT developer-mode MCP mapping (plugin_asdk_app...)
+.app.json
+
 # Skill working dirs (created by skill runs, never committed)
 growth/
 work/
