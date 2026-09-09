@@ -2,7 +2,7 @@
 
 **Free, open-source agent skills for marketing, ads & creatives**, shared by the [POPJAM.IO](https://popjam.io) team.
 
-These are distilled versions of the pipelines we run in production at POPJAM: brand research, audience discovery, synthetic persona panels, ad creative generation, engagement simulation, landing pages that convert, brand-guideline extraction, writing-style extraction, and ad-platform safe-zone validation. They work in Claude Code and any agent that supports the [Agent Skills](https://agentskills.io) standard (Cursor, Codex, Amp, opencode, …).
+These are distilled versions of the pipelines we run in production at POPJAM: ad creative generation, target audience segmentation, reaction simulation with synthetic persona panels, campaign research, landing pages that convert, brand-guideline extraction, writing-style extraction, and ad-platform safe-zone validation. They work in Claude Code and any agent that supports the [Agent Skills](https://agentskills.io) standard (Cursor, Codex, Amp, opencode, …).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -55,6 +55,17 @@ directory availability follows OpenAI's review and publication flow. See
 [SUBMISSION.md](SUBMISSION.md) for the submission-ready listing, review cases,
 and final portal checklist.
 
+### Versioning
+
+Plugin releases use semantic versioning. Keep the release version identical in
+`plugin.json`, `.codex-plugin/plugin.json`, the top-level `version` in
+`.claude-plugin/marketplace.json`, and that marketplace's `popjam-skills`
+entry. Bump it on every published release and tag the commit as `vX.Y.Z`.
+
+The `1.0.0` embedded in the Agent Plugins schema URLs and `schema_version: 1`
+in `chatgpt-app-submission.json` describe file formats, not the POPJAM release.
+Neither `mcp.json` nor `.mcp.json` has a plugin-version field.
+
 ### Manual (any agent)
 
 Copy a skill directory into your agent's skills folder, e.g. for Claude Code:
@@ -67,7 +78,7 @@ cp -r skills/skills/popjam-growth-engine ~/.claude/skills/   # personal, all pro
 
 ## Hosted MCP server
 
-These skills run POPJAM's pipelines inside your own agent. If you'd rather call POPJAM's managed engine directly, connect the **POPJAM MCP server**: a remote server that exposes the same campaign tools (brand research, audience discovery, persona panels, ad generation, simulation) as callable tools, running on our infrastructure with durable memory.
+These skills run POPJAM's pipelines inside your own agent. If you'd rather call POPJAM's managed engine directly, connect the **POPJAM MCP server**: a remote server for generating ad creatives, segmenting target audiences, and simulating reactions with synthetic personas, with supporting campaign research and durable workspace memory.
 
 Installing the plugin above already wires it up. To add it standalone in Claude Code:
 

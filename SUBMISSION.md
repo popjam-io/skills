@@ -7,15 +7,16 @@ existing integration identifier.
 
 ## Listing
 
+- **Release version:** 1.3.1
 - **Name:** POPJAM
 - **Category:** Marketing
-- **Short description:** Research, test, and create better-performing ad
-  campaigns before you spend.
+- **Short description:** Generate ads, segment audiences, and simulate persona
+  reactions.
 - **Long description:** Connect your POPJAM account to turn a campaign brief
-  or public website into audience research, synthetic-persona feedback,
-  on-platform ad concepts, and creative directions. Drafting tools work
-  without an existing workspace. Persistent campaigns, media generation, and
-  simulated reactions use your POPJAM workspace and credit balance.
+  or public website into target audience segments and ready-to-run ad
+  creatives, then simulate reactions with synthetic personas to learn who
+  engages and why. Persistent campaigns, media generation, and simulations
+  use your POPJAM workspace and credit balance.
 - **Developer:** POPJAM OÜ
 - **Website:** https://popjam.io/mcp
 - **Support:** https://popjam.io/support
@@ -32,9 +33,9 @@ existing integration identifier.
 
 ## Starter prompts
 
-1. Research the audience for my product and propose three ad angles.
-2. Turn https://popjam.io/pricing into three tested ad concepts.
-3. Help me plan a campaign and simulate how target audiences may react.
+1. Define target audience segments for my product and explain who each ad should speak to.
+2. Turn https://popjam.io/pricing into three ready-to-test ad concepts.
+3. Simulate how synthetic personas in my target audiences would react to this ad.
 
 ## Reviewer account
 
@@ -117,13 +118,13 @@ POPJAM workspace, even when POPJAM calls a model provider internally.
 | `list_tasks` | true | false | false | Reads caller-owned task summaries. |
 | `cancel_task` | false | false | true | Stops work and may leave already-spent credits or persisted partial output. |
 
-## Release notes
+## Release notes — 1.3.1
 
 Initial public POPJAM plugin submission: six open-source marketing skills plus
-the hosted POPJAM MCP server for research, audience definition, ad concepts,
-campaign generation, task tracking, and workspace-aware creative production.
-This release adds complete safety annotations and private-network URL
-protection across both website-fetch modes.
+the hosted POPJAM MCP server for target audience segmentation, ad generation,
+synthetic-persona reaction simulation, campaign workflows, task tracking, and
+workspace-aware creative production. This release adds complete safety
+annotations and private-network URL protection across both website-fetch modes.
 
 ## Portal checklist
 

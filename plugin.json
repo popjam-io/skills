@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "popjam-skills",
-  "version": "1.3.0",
-  "description": "Research, test, and create better-performing ad campaigns with POPJAM.",
+  "version": "1.3.1",
+  "description": "Generate ads, segment target audiences, and simulate reactions with synthetic personas.",
   "author": {
     "name": "POPJAM OÜ",
     "email": "info@popjam.io",
@@ -22,23 +22,23 @@
     "com.openai": {
       "interface": {
         "displayName": "POPJAM",
-        "shortDescription": "Research, test, and create ads before you spend.",
-        "longDescription": "Turn a campaign brief or website into audience research, tested ad concepts, synthetic-persona feedback, and ready-to-produce creative directions.",
+        "shortDescription": "Generate ads, segment audiences, and simulate persona reactions.",
+        "longDescription": "Turn a campaign brief or website into target audience segments and ready-to-run ad creatives, then simulate reactions with synthetic personas to learn what resonates before launch.",
         "developerName": "POPJAM OÜ",
         "category": "Marketing",
         "capabilities": [
-          "Research",
-          "Creative generation",
-          "Campaign analysis"
+          "Ad generation",
+          "Target audience segmentation",
+          "Synthetic-persona simulation"
         ],
         "websiteURL": "https://popjam.io/mcp",
         "privacyPolicyURL": "https://popjam.io/privacy",
         "termsOfServiceURL": "https://popjam.io/terms",
         "brandColor": "#FF3131",
         "defaultPrompt": [
-          "Research the audience for my product and propose three ad angles.",
-          "Turn https://popjam.io/pricing into three tested ad concepts.",
-          "Help me plan a campaign and simulate how target audiences may react."
+          "Define target audience segments for my product and explain who each ad should speak to.",
+          "Turn https://popjam.io/pricing into three ready-to-test ad concepts.",
+          "Simulate how synthetic personas in my target audiences would react to this ad."
         ]
       }
     }

@@ -1,0 +1,332 @@
+{
+  "$schema": "https://developers.openai.com/apps-sdk/schemas/chatgpt-app-submission.v1.json",
+  "schema_version": 1,
+  "app_info": {
+    "display_name": "POPJAM",
+    "subtitle": "Generate and test ads",
+    "description": "POPJAM helps users segment target audiences, generate ready-to-run ad creatives, and simulate reactions with synthetic personas to learn who engages and why before launching a campaign.",
+    "category": "BUSINESS"
+  },
+  "tools": {
+    "research_topic": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Queries current web sources and returns a sourced summary without writing POPJAM workspace data.",
+        "open_world_justification": "Interacts with live public-web sources through an external research service but does not publish content.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend user credits, or perform an irreversible action."
+      }
+    },
+    "fetch_website": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Reads one validated public HTTP or HTTPS page and returns sanitized text without persisting workspace data.",
+        "open_world_justification": "Connects to a caller-selected public website or an external rendered-scrape service to retrieve page content.",
+        "destructive_justification": "Does not modify the target website, delete data, or spend user credits."
+      }
+    },
+    "define_audiences": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Generates structured audience suggestions in memory from supplied campaign text and does not persist them.",
+        "open_world_justification": "Does not access or change public internet state or another external user-facing system.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend user credits, or perform an irreversible action."
+      }
+    },
+    "generate_ad_concepts": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Generates non-persisted ad drafts from supplied context and leaves the POPJAM workspace unchanged.",
+        "open_world_justification": "Does not publish ads or change public internet state or another external user-facing system.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend user credits, or perform an irreversible action."
+      }
+    },
+    "start_campaign": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Creates or updates private campaign workspace records and starts a background campaign workflow.",
+        "open_world_justification": "Crawls the supplied public website and researches public-web sources while building the campaign.",
+        "destructive_justification": "A successful campaign run spends the authenticated workspace's credits and persists generated outputs."
+      }
+    },
+    "start_deep_research": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Starts and persists a background research task and may store its resulting research document.",
+        "open_world_justification": "Queries multiple live public-web sources through the background research workflow.",
+        "destructive_justification": "Does not delete or overwrite user data, revoke access, or publish content."
+      }
+    },
+    "get_campaign_results": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Retrieves audiences, ads, insights, and status from one caller-owned campaign workspace without modifying them.",
+        "open_world_justification": "Reads only private data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend credits, or interrupt work."
+      }
+    },
+    "copilot": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": true,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Persists conversation history and can create workspace records or start generation and simulation tasks.",
+        "open_world_justification": "Can research public-web sources and interact with connected external services while handling a user request.",
+        "destructive_justification": "Can trigger credit-spending background jobs and other consequential workspace actions after its built-in approval checks."
+      }
+    },
+    "list_labs": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Lists caller-owned lab summaries without creating or updating records.",
+        "open_world_justification": "Reads only private data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend credits, or interrupt work."
+      }
+    },
+    "get_lab": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Retrieves one caller-owned lab's state, audiences, and recent tasks without changing them.",
+        "open_world_justification": "Reads only private data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend credits, or interrupt work."
+      }
+    },
+    "get_active_lab": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Reads the caller's currently selected lab without changing the selection or workspace data.",
+        "open_world_justification": "Reads only private data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete, overwrite, revoke access, spend credits, or interrupt work."
+      }
+    },
+    "set_active_lab": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Updates the caller's active-lab selection in their private POPJAM profile.",
+        "open_world_justification": "Changes only a private selection inside the authenticated POPJAM organization.",
+        "destructive_justification": "The selection is reversible and does not delete data, spend credits, or interrupt work."
+      }
+    },
+    "save_ad_concept": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Creates a private ad-content record in a caller-owned lab and may update the caller's active-lab selection.",
+        "open_world_justification": "Saves only to the authenticated POPJAM workspace and does not publish the ad.",
+        "destructive_justification": "Creates a reversible draft record without deleting existing data or spending generation credits."
+      }
+    },
+    "generate_image": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Starts an image-generation task that writes the resulting media back to caller-owned content.",
+        "open_world_justification": "Operates within the authenticated private workspace and does not publish the generated image.",
+        "destructive_justification": "The background run spends image-generation credits, with refunds only when generation fails."
+      }
+    },
+    "generate_video": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Starts a video-generation task that writes the resulting media back to caller-owned content.",
+        "open_world_justification": "Operates within the authenticated private workspace and does not publish the generated video.",
+        "destructive_justification": "The background run spends video-generation credits, with refunds only when generation fails."
+      }
+    },
+    "generate_animation": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Starts an animation-generation task that persists rendered media and source files to caller-owned content.",
+        "open_world_justification": "Operates within the authenticated private workspace and does not publish the generated animation.",
+        "destructive_justification": "The background run spends animation-generation credits, with refunds only when generation fails."
+      }
+    },
+    "generate_carousel": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Starts a carousel-generation task that writes generated card images back to caller-owned content.",
+        "open_world_justification": "Operates within the authenticated private workspace and does not publish the generated carousel.",
+        "destructive_justification": "The background run spends generation credits for every carousel card, with refunds only when generation fails."
+      }
+    },
+    "get_task": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Retrieves one caller-owned task's status, logs, and result without changing it.",
+        "open_world_justification": "Reads only private task data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete data, spend credits, or interrupt the task."
+      }
+    },
+    "wait_for_task": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Long-polls and returns snapshots of one caller-owned task without changing its execution.",
+        "open_world_justification": "Reads only private task data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete data, spend credits, or interrupt the task."
+      }
+    },
+    "list_tasks": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Lists caller-owned background-task summaries without changing any task or workspace record.",
+        "open_world_justification": "Reads only private task data inside the authenticated POPJAM organization.",
+        "destructive_justification": "Does not delete data, spend credits, or interrupt running work."
+      }
+    },
+    "cancel_task": {
+      "annotations": {
+        "readOnlyHint": false,
+        "openWorldHint": false,
+        "destructiveHint": true
+      },
+      "justifications": {
+        "read_only_justification": "Requests cancellation from the workflow orchestrator and updates the private task status to CANCELLING.",
+        "open_world_justification": "Changes only the caller's private POPJAM task and its private workflow-orchestrator state.",
+        "destructive_justification": "Stops in-progress work while already persisted outputs and spent credits remain in place."
+      }
+    }
+  },
+  "test_cases": [
+    {
+      "description": "Research a market using current public sources.",
+      "user_prompt": "Research the European refillable water bottle market and cite current sources.",
+      "file_attachment_urls": null,
+      "tools_triggered": "research_topic",
+      "expected_output": "Returns a relevant sourced market summary without creating POPJAM workspace records.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Inspect a stable public product page.",
+      "user_prompt": "Summarize the messaging, pricing, and offer on https://popjam.io/pricing.",
+      "file_attachment_urls": null,
+      "tools_triggered": "fetch_website",
+      "expected_output": "Returns readable sanitized content from the public page without persisting it to a workspace.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Define several distinct audiences from a product brief.",
+      "user_prompt": "Define three audiences for a sustainable commuter backpack priced at €120.",
+      "file_attachment_urls": null,
+      "tools_triggered": "define_audiences",
+      "expected_output": "Returns three distinct structured audience segments without persisting them.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Draft platform-aware ad concepts without media generation.",
+      "user_prompt": "Create three Meta feed ad concepts for a sustainable commuter backpack priced at €120.",
+      "file_attachment_urls": null,
+      "tools_triggered": "generate_ad_concepts",
+      "expected_output": "Returns three platform-aware text drafts without creating a workspace record or spending credits.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Start a minimal bounded campaign after confirming credit spend.",
+      "user_prompt": "Start a minimal campaign for https://popjam.io/pricing with 1 audience, 1 persona, 1 image ad, no variants, no carousels, and no animations.",
+      "file_attachment_urls": null,
+      "tools_triggered": "start_campaign",
+      "expected_output": "After confirmation, returns a task handle, lab handle, and bounded credit estimate for tracking the campaign.",
+      "expected_output_url": null
+    }
+  ],
+  "negative_test_cases": [
+    {
+      "description": "Do not trigger for calendar management.",
+      "user_prompt": "Add my product launch meeting to Google Calendar tomorrow at 10:00.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "The app should not be invoked because it does not manage calendar events.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Do not trigger for outbound email delivery.",
+      "user_prompt": "Send this finished ad as an email to my 5,000 subscribers.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "The app should not be invoked because it does not send email campaigns or messages.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Do not trigger for unrelated financial quotes.",
+      "user_prompt": "What is NVIDIA's stock price right now?",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "The app should not be invoked because stock-market quotes are outside its marketing workflows.",
+      "expected_output_url": null
+    }
+  ]
+}
