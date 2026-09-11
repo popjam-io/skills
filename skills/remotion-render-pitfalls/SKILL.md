@@ -44,6 +44,33 @@ const COLORS = { primary: "#1B8EFB", accent: "#14816E" };
 Before calling `render_animation`, mentally check that no identifier is used
 that isn't imported or declared in that file.
 
+### 1b. React API is imported from `react`, never from `remotion` (TS2694)
+
+`remotion` re-exports nothing of React. `import { FC } from "remotion"` fails
+`tsc` with `TS2694 Namespace '.../remotion/dist/cjs/index' has no exported
+member 'FC'` — and because the component then has no prop types, every
+destructured prop cascades into `TS7031 Binding element 'x' implicitly has an
+'any' type`. One wrong import copied across seven scene files took down a
+whole production render.
+
+❌
+```tsx
+import { AbsoluteFill, Img, FC } from "remotion";
+```
+
+✅
+```tsx
+import React from "react";
+import type { FC, CSSProperties, ReactNode } from "react";
+import { AbsoluteFill, Img, useCurrentFrame } from "remotion";
+```
+
+The same applies to every React hook and helper (`useState`, `useMemo`,
+`useRef`, `useCallback`, `Fragment`, `memo`, ...): React things from `react`,
+Remotion things (`AbsoluteFill`, `Img`, `Sequence`, `interpolate`, `spring`,
+`Easing`, `useCurrentFrame`, `useVideoConfig`, `staticFile`, ...) from
+`remotion`.
+
 ---
 
 ## 2. Google Font module names are PascalCase with NO underscores (TS2307)
@@ -348,7 +375,9 @@ write the result.
 
 ## Pre-render self-check (run through this before `render_animation`)
 
-1. Every identifier is imported or declared (no stray `colors`, `interpolate`…).
+1. Every identifier is imported or declared (no stray `colors`, `interpolate`…),
+   and React names (`FC`, `ReactNode`, `useState`, …) come from `react`, never
+   from `remotion`.
 2. Every `@remotion/google-fonts/*` import is PascalCase with NO underscores
    (`PlayfairDisplay`, not `Playfair_Display`) and a real installed family,
    else a web-safe stack (`Arial, Helvetica, system-ui, sans-serif`);
