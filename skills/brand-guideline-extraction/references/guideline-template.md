@@ -30,8 +30,10 @@ Recurring shapes/motifs and their meaning. The badge vocabulary: every recurring
 ## 7. Imagery & Product Presentation
 Cutout vs lifestyle vs podium staging, by context. Product count norms. Human presence rules. Third-party brand-logo usage (trust rows). Treatments never observed (list them — useful negative space).
 
+Write imagery rules a generation pipeline can follow. The guideline feeds image generators that create new scenes, so state *what to show and what to ground it in*, never a precondition the generator cannot meet. "Authentic" means grounded in the brand's real reference photos (its own products, places, people types and style), not "real photos only". A brand book line such as "no stock photography" forbids generic, off-brand stock, not on-brand generated imagery: write "ground every scene in the brand's own reference photos; no generic off-brand stock look", never "only verified original photos" or "all imagery must be actual photography".
+
 ## 8. Tone of Voice & Copy Rules
-Voice attributes with verbatim examples. Offer-framing conventions (percentage vs absolute vs starting-price vs coupon) and where each appears. Headline formulas. CTA patterns verbatim. Urgency devices. Formality, emoji policy, language conventions. Legal/fine-print conventions.
+Voice attributes with verbatim examples. Offer-framing conventions (percentage vs absolute vs starting-price vs coupon) and where each appears, scoped to their trigger ("percentage badges in promotional discount campaigns"), so they agree with the separate voice guideline instead of contradicting it. Headline formulas. CTA patterns verbatim. Urgency devices. Formality, emoji policy, language conventions. Legal/fine-print conventions.
 
 ## 9. Sub-Systems & Overrides
 One subsection per discovered sub-system (seasonal, co-brand, category, pipeline): the trigger condition + which rules above it overrides. This is what prevents the guideline from flattening a living system into a false average.
@@ -58,7 +60,9 @@ Colors: background #HEX [treatment]; primary #HEX; accent #HEX; price/emphasis #
 Typography: headline [traits, case], body [traits]; hierarchy [ratio]; alignment [rule].
 Layout: [zone formula]; reading order: [badge -> headline -> product -> price -> CTA]; density [norm]; fixed elements: [header band, legal line...].
 Graphic elements: [badge vocabulary with verbatim text]; [shapes/motifs].
-Imagery: [product presentation mode, count, treatment]; [logo row rule].
-Copy: headline formula [..]; offer framing [..]; CTA [verbatim pattern]; urgency [verbatim device]; language [..]; emoji [policy].
-Never: [the 3-5 most important don'ts].
+Imagery: [product presentation mode, count, treatment]; [logo row rule]; ground generated scenes in the brand's own reference photos.
+Copy: headline formula [..]; offer framing [.. and when it applies]; CTA [verbatim pattern]; urgency [verbatim device]; language [..]; emoji [policy].
+Never: [the 3-5 most important don'ts: things a generator can avoid in the image it makes, never preconditions it cannot meet].
 ```
+
+Every hex in the block is programmatically confirmed; an `(estimate)` is never used for a role a confirmed color already fills (text, background, primary).

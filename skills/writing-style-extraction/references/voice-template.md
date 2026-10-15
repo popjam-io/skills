@@ -25,8 +25,10 @@ The ordered part list per channel (hook → context → proof → offer → CTA 
 ## 6. CTAs & Offer Framing
 CTA patterns verbatim, per channel, with type (shop / sign-up / learn-more / link-in-bio / engage / contact). Offer framing conventions (percentage vs absolute vs starting-price vs free-trial vs coupon) and where each appears. Urgency devices verbatim, and whether urgency is used at all.
 
+Describe offer framing as observed, scoped to its trigger ("percentage discounts only in promotional campaigns; seasonal messaging otherwise"). Never turn a tone preference ("premium, not discount-driven") into a ban on a framing the corpus or brand book actually uses: the visual guideline extracted from the same brand will show those offers, and a contradiction between the two breaks every generated ad.
+
 ## 7. Vocabulary
-Recurring phrases, taglines and product names verbatim (the brand lexicon). Banned or absent words and constructions (superlatives, discounts, "we", competitor names…). Emoji policy: level, the specific set, position. Hashtag policy: count range, fixed brand tags vs topical tags, position. Capitalisation and punctuation habits (all-caps words, exclamation policy, ellipses, dashes).
+Voice rules cover copy only; imagery and photography rules belong to the visual guideline (brand-guideline-extraction). Recurring phrases, taglines and product names verbatim (the brand lexicon). Banned or absent words and constructions (superlatives, discounts, "we", competitor names…). Emoji policy: level, the specific set, position. Hashtag policy: count range, fixed brand tags vs topical tags, position. Capitalisation and punctuation habits (all-caps words, exclamation policy, ellipses, dashes).
 
 ## 8. Language & Localisation
 Language mix per channel with counts. Formality marker per language (tú/usted, sen/siz, du/ni). Code-switching habits (English CTAs inside local-language copy, English product names). Which language(s) generated copy should be written in, per channel.
@@ -51,9 +53,9 @@ Hook: [formula] — e.g. "[verbatim hook]".
 Structure: [hook -> context -> proof -> offer -> CTA -> hashtags].
 Length: [chars/words range]; sentences [short | medium]; [paragraph / line-break habit].
 CTA: "[verbatim pattern 1]" | "[verbatim pattern 2]"; type [shop | link-in-bio | ...].
-Offer framing: [percentage | absolute | starting-price | free-trial | none]; urgency: ["verbatim device" | none].
+Offer framing: [percentage | absolute | starting-price | free-trial | none, each with when it applies]; urgency: ["verbatim device" | none].
 Emoji: [none | accent (set: ...) | heavy]; position [leading | inline | trailing].
 Hashtags: [none | n-m trailing: #brandtag + topical].
 Language: [write in tr; product names and CTA in en | ...].
-Never: [3-5 don'ts, the most important first].
+Never: [3-5 copy don'ts, the most important first; no imagery rules].
 ```

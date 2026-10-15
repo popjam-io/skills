@@ -68,6 +68,8 @@ Things that separate a usable guideline from a pretty one:
 - Every rule cites evidence: "(observed in 31/38 assets)" or names example files. Unverifiable rules get challenged by designers and ignored by pipelines.
 - Specifics over adjectives: "headline: extra-bold rounded sans, all-caps, ~2.5x body size, tight tracking" beats "bold modern typography".
 - Sub-systems get their own subsections with their trigger condition ("when the asset is seasonal/co-branded/category X, the following overrides apply...").
+- Rules must be followable by a generator. Imagery rules say what to show and what to ground it in ("ground every scene in the brand's own reference photos; no generic off-brand stock look"), never a precondition a generation pipeline cannot meet ("only verified original photos"). A brand book's "no stock photography" forbids off-brand stock, not on-brand generated imagery.
+- Scope offer framing to its trigger ("percentage badges in promotional discount campaigns") so the visual guideline and the voice guideline (writing-style-extraction) never contradict each other.
 - The do/don't section uses real filenames from the corpus as the do's, and describes the don'ts as violations of specific numbered rules.
 
 ## Phase 5 — Validation & generation handoff
