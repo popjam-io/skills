@@ -99,9 +99,9 @@
         "destructiveHint": true
       },
       "justifications": {
-        "read_only_justification": "Persists conversation history and can create workspace records or start generation and simulation tasks.",
-        "open_world_justification": "Can research public-web sources and interact with connected external services while handling a user request.",
-        "destructive_justification": "Can trigger credit-spending background jobs and other consequential workspace actions after its built-in approval checks."
+        "read_only_justification": "Ask PJ, POPJAM's AI: persists conversation history and can create workspace records or start generation and simulation tasks.",
+        "open_world_justification": "PJ, POPJAM's AI, can research public-web sources and interact with connected external services while handling a user request.",
+        "destructive_justification": "PJ, POPJAM's AI, can trigger credit-spending background jobs and other consequential workspace actions after its built-in approval checks."
       }
     },
     "list_labs": {

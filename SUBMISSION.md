@@ -103,7 +103,7 @@ POPJAM workspace, even when POPJAM calls a model provider internally.
 | `start_campaign` | false | true | true | Crawls/researches the public web, creates workspace data, and spends credits. |
 | `start_deep_research` | false | true | false | Starts and persists a public-web research task without deleting data. |
 | `get_campaign_results` | true | false | false | Reads only the caller's POPJAM workspace. |
-| `copilot` | false | true | true | Can research externally, persist workspace changes, trigger jobs, and spend credits. |
+| `copilot` ("Ask PJ") | false | true | true | Asks PJ, POPJAM's AI: can research externally, persist workspace changes, trigger jobs, and spend credits. |
 | `list_labs` | true | false | false | Reads only the caller's POPJAM workspace. |
 | `get_lab` | true | false | false | Reads one caller-owned lab. |
 | `get_active_lab` | true | false | false | Reads the caller's selected lab. |
