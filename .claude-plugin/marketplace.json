@@ -39,7 +39,8 @@
         "./skills/brand-guideline-extraction",
         "./skills/writing-style-extraction",
         "./skills/ad-platform-safe-zones",
-        "./skills/remotion-render-pitfalls"
+        "./skills/remotion-render-pitfalls",
+        "./skills/art-motion"
       ],
       "mcpServers": {
         "popjam": {

@@ -16,6 +16,7 @@ These are distilled versions of the pipelines we run in production at POPJAM: ad
 | [**writing-style-extraction**](skills/writing-style-extraction) | Reverse-engineer a brand's verbal identity (voice, hooks, structure, CTAs, offer framing, emoji/hashtag policy, formality, language mix) from its existing captions, articles, ad copy and page copy, with a bundled stats script for the numbers and a per-channel "voice prompt block" for on-brand AI copywriting. |
 | [**ad-platform-safe-zones**](skills/ad-platform-safe-zones) | Current (2025–26, source-verified) safe-zone and canvas specs for ad creatives on Meta, TikTok, and Google placements, plus a bundled validator that checks finished images and renders overlay proofs. Catches the obsolete numbers everyone still uses — Meta's 9:16 bottom clear zone is now 35%, not 20%. |
 | [**remotion-render-pitfalls**](skills/remotion-render-pitfalls) | Render-breaking [Remotion](https://remotion.dev) mistakes that pass `tsc` + `eslint` but crash at render time. Battle-tested against POPJAM's production render pipeline; useful for any strict Remotion setup. |
+| [**art-motion**](skills/art-motion) | Make [Remotion](https://remotion.dev) animations that look painted or drawn: 35 art-style recipes (Van Gogh flow-field strokes, Monet water light, pointillism, ink wash, Bauhaus, pixel art, vaporwave and more) and 8 explainer grammars (kinetic type, Kurzgesagt-style flat, Vox-style collage, whiteboard, keynote UI, finance charts...), plus camera rules that keep a piece from playing like a slideshow. Adapted from [huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion) (MIT). |
 
 ## Install
 
@@ -101,6 +102,7 @@ Once installed, just describe the outcome and the skills trigger themselves:
 - *"Extract brand guidelines from ./assets"* → **brand-guideline-extraction**
 - *"Figure out our brand voice from these captions and make the ad copy sound like us"* → **writing-style-extraction**
 - *"Will this creative get cropped or covered on Reels?"* → **ad-platform-safe-zones** validates it and renders an overlay proof
+- *"Make this product animation look like a moving Van Gogh painting"* → **art-motion**
 
 Some phases of the growth engine generate real media. Image/video generation uses the [Higgsfield MCP](https://higgsfield.ai) and animations use [Remotion](https://remotion.dev). If neither is available, the skill still delivers strategy and simulation on text concepts, honestly.
 
@@ -118,7 +120,8 @@ skills/
 ├── brand-guideline-extraction/
 ├── writing-style-extraction/
 ├── ad-platform-safe-zones/
-└── remotion-render-pitfalls/
+├── remotion-render-pitfalls/
+└── art-motion/
 ```
 
 Each skill follows the [Agent Skills specification](https://agentskills.io/specification): a `SKILL.md` with `name` + `description` frontmatter, and progressive disclosure, where references are read only when their phase begins, keeping context lean.
