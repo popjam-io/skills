@@ -7,7 +7,7 @@ existing integration identifier.
 
 ## Listing
 
-- **Release version:** 1.3.1
+- **Release version:** 1.4.0
 - **Name:** POPJAM
 - **Category:** Marketing
 - **Short description:** Generate ads, segment audiences, and simulate persona
@@ -118,7 +118,20 @@ POPJAM workspace, even when POPJAM calls a model provider internally.
 | `list_tasks` | true | false | false | Reads caller-owned task summaries. |
 | `cancel_task` | false | false | true | Stops work and may leave already-spent credits or persisted partial output. |
 
-## Release notes — 1.3.1
+## Release notes — 1.4.0
+
+Seven open-source marketing and creative skills plus the hosted POPJAM MCP
+server. Changes since 1.3.1:
+
+- Add **art-motion**: 35 art-style recipes, eight explainer grammars, and camera
+  and directing guidance for Remotion animations. Adapted from the MIT-licensed
+  huashu-art-motion skill, with attribution included.
+- Refine brand-guideline and writing-style extraction instructions and templates.
+- Clarify React imports in the Remotion render-pitfalls skill.
+- Correct the ChatGPT app-submission schema URL and clarify that the `copilot`
+  tool is **Ask PJ**.
+
+### Previous release notes — 1.3.1
 
 Initial public POPJAM plugin submission: six open-source marketing skills plus
 the hosted POPJAM MCP server for target audience segmentation, ad generation,
