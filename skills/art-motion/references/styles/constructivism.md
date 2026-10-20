@@ -24,7 +24,7 @@ Static poster in a cached layer; px at 1920 wide; scale with the canvas.
 - Flutters: scarf tails sin(9t)*6; steam as three rising black zigzags.
 
 ## Signature transition
-Red wedge: a #c8231c triangle (520 long, 660 tall) stabs along a -0.32 rad axis from lower left across the frame; the new shot is revealed 420px behind the tip; three black type bars (26/18/34px tall, lagging 0/0.12/0.2) chase it. 0.4 s (12 frames). Custom presentation (see 16_2026.md): entering scene `clipPath: polygon(...)` in the rotated frame, wedge and bars as SVG polygons.
+Red wedge: a #c8231c triangle (520 long, 660 tall) stabs along a -0.32 rad axis from lower left across the frame; the new shot is revealed 420px behind the tip; three black type bars (26/18/34px tall, lagging 0/0.12/0.2) chase it. 0.4 s (12 frames). Custom presentation (see flat-illustration.md): entering scene `clipPath: polygon(...)` in the rotated frame, wedge and bars as SVG polygons.
 
 ## Pitfalls
 - Overlapping parts of one letter in a single path cancel under nonzero winding ("A" read as "B"); fill parts separately.

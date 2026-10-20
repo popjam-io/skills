@@ -1,6 +1,6 @@
 ---
 name: art-motion
-description: Direct and build art-style and explainer-style motion in Remotion. Covers 35 painterly and graphic style recipes (Van Gogh flow-field strokes, Monet water light, Seurat pointillism, ink wash, Klimt gold leaf, Bauhaus, pop-art halftone, 8-bit pixel, vaporwave, Art Nouveau, cubism and more) and 8 explainer grammars (kinetic typography, Kurzgesagt-style flat, Vox collage, whiteboard, 3Blue1Brown-style morphs, keynote UI, finance charts, storytime), plus camera rules and checks against slideshow-style animation. Use it when an animation should look painted or drawn in a named artist's, movement's or era's style ("make it Van Gogh", "like a Monet", "Bauhaus", "pixel art", "ink wash", "vaporwave", "make the painting move"), when it should follow an explainer grammar, when it feels like a slideshow or PPT, has too many zooms or a dead background, or when moving a style to a new subject. Adapted from huashu-art-motion (MIT).
+description: Direct and build art-style and explainer-style motion in Remotion with 35 painterly and graphic style cards (Van Gogh flow-field strokes, Monet water light, Seurat dots, ink wash, Klimt gold, Bauhaus, pop-art halftone, pixel art, vaporwave, Art Nouveau, cubism and more), 8 explainer grammars (kinetic typography, Kurzgesagt-style flat, Vox collage, whiteboard, 3Blue1Brown-style morphs, keynote-style product UI, finance charts, storytime), and camera rules against slideshow-style animation. Use it when an animation should look painted or drawn in a named artist's, movement's or era's style ("make it Van Gogh", "pixel art", "make the painting move"); when it demos a product, app, UI or screen recording, charts real numbers or runs on kinetic text; when it feels like a slideshow, zooms too much or has a dead background; or when moving a style to a new subject. Adapted from huashu-art-motion (MIT).
 license: MIT
 metadata:
   author: POPJAM (https://popjam.io)
@@ -22,18 +22,34 @@ is saying and wants to keep watching. In an art style, the look is recognizable
 at a glance, and the painting is alive. It is never still images cutting into
 each other.
 
-## Pick what to read
+## How to open the references
 
-Read only what the task needs. Every path is under this skill's directory.
+`load_capability` loads only this page. Every other file opens with `read_file`, and its path starts with
+`art-motion/`, for example `read_file("art-motion/references/styles/van-gogh.md")`. Passing a file path to
+`load_capability` fails. If a name is unclear, run `find_files` or `list_directory` on `art-motion/references/`.
+
+**When the brief or the user names a style or an explainer look, read its card before you write scene code.** The
+cards hold the measured palettes, stroke sizes, timings and known pitfalls. A style recalled from memory loses them.
+
+## Pick what to read
 
 | The brief or the user says | Read |
 |---|---|
-| A named artist, movement or era: "Van Gogh", "impressionist", "Bauhaus", "pixel art", "vaporwave", "make it painterly" | `references/styles/INDEX.md`, then the one card that fits, then `references/painting-in-code.md` |
-| That style on a subject its card wasn't built for, or a style not in the index | `references/style-transfer.md` |
-| "Make the painting move", a journey through several worlds or styles, a morph from one style into another | `references/living-paintings.md` and `references/transitions.md` |
-| An explainer feel: kinetic type, Kurzgesagt-style flat, Vox-style collage, whiteboard, 3Blue1Brown-style, keynote UI, finance chart, storytime | `references/grammars/INDEX.md`, then one grammar card |
-| "Feels like a slideshow", "too many zooms", "boring", "the camera is off", or a shot list to plan | `references/directing.md` |
-| Colour choices, "looks AI-generated", mapping a brand palette | `references/palettes.md` |
+| A named artist, movement or era, or "make it painterly" | Its style card (list below), then [painting-in-code](references/painting-in-code.md). Unsure which style fits: [the style index](references/styles/INDEX.md) |
+| A product demo, an app or UI walkthrough, a screen recording | [keynote-ui](references/grammars/keynote-ui.md) |
+| An explainer look, kinetic text, a chart of real numbers | Its grammar card (list below). Unsure which fits: [the grammar index](references/grammars/INDEX.md) |
+| That style on a subject its card wasn't built for, or a style not listed | [style-transfer](references/style-transfer.md) |
+| "Make the painting move", a journey through worlds or styles, a morph between styles | [living-paintings](references/living-paintings.md) and [transitions](references/transitions.md) |
+| "Feels like a slideshow", "too many zooms", "boring", pacing, or a shot list to plan | [directing](references/directing.md) |
+| Colour choices, "looks AI-generated", mapping a brand palette | [palettes](references/palettes.md) |
+
+**Style cards**, under `art-motion/references/styles/`:
+- Painters: [van-gogh](references/styles/van-gogh.md), [monet](references/styles/monet.md), [impressionism](references/styles/impressionism.md), [seurat](references/styles/seurat.md), [rembrandt](references/styles/rembrandt.md), [renaissance](references/styles/renaissance.md), [klimt](references/styles/klimt.md), [munch](references/styles/munch.md), [matisse](references/styles/matisse.md), [picasso-blue](references/styles/picasso-blue.md), [dali](references/styles/dali.md), [hopper](references/styles/hopper.md), [kusama](references/styles/kusama.md), [haring](references/styles/haring.md)
+- Graphic and digital: [flat-illustration](references/styles/flat-illustration.md), [pop-art](references/styles/pop-art.md), [pixel-art](references/styles/pixel-art.md), [vaporwave](references/styles/vaporwave.md), [retro-cgi](references/styles/retro-cgi.md), [bauhaus](references/styles/bauhaus.md), [constructivism](references/styles/constructivism.md), [cubism](references/styles/cubism.md), [art-nouveau](references/styles/art-nouveau.md), [silver-age-comic](references/styles/silver-age-comic.md)
+- Animation and film: [ghibli](references/styles/ghibli.md), [shinkai](references/styles/shinkai.md), [rubber-hose](references/styles/rubber-hose.md), [shadow-puppet](references/styles/shadow-puppet.md)
+- Ancient and traditional: [cave-painting](references/styles/cave-painting.md), [egyptian-mural](references/styles/egyptian-mural.md), [greek-vase](references/styles/greek-vase.md), [roman-mosaic](references/styles/roman-mosaic.md), [gothic-manuscript](references/styles/gothic-manuscript.md), [dunhuang](references/styles/dunhuang.md), [ink-wash](references/styles/ink-wash.md)
+
+**Grammar cards**, under `art-motion/references/grammars/`: [kinetic-type](references/grammars/kinetic-type.md), [keynote-ui](references/grammars/keynote-ui.md), [finance-chart](references/grammars/finance-chart.md), [kurzgesagt](references/grammars/kurzgesagt.md), [vox](references/grammars/vox.md), [whiteboard](references/grammars/whiteboard.md), [3blue1brown](references/grammars/3blue1brown.md), [storytime](references/grammars/storytime.md)
 
 ## The director's rules (always)
 
@@ -115,7 +131,7 @@ Read only what the task needs. Every path is under this skill's directory.
   once with `useMemo` and redraw only what moves. The live preview plays in
   real time, so keep each frame's drawing work under about 30 ms at 1080p. For
   the hand-drawn "boil", reseed every 3-4 frames (8-10 fps).
-  `references/painting-in-code.md` has the skeleton.
+  [painting-in-code](references/painting-in-code.md) has the skeleton.
 - **Use SVG or CSS when they're enough.** SVG paths, patterns and filters
   (`feTurbulence`, `feDisplacementMap`, `feGaussianBlur`, `feColorMatrix`),
   and CSS `mix-blend-mode`, `clip-path` and `mask-image`, are often lighter
@@ -124,15 +140,15 @@ Read only what the task needs. Every path is under this skill's directory.
   moments about 0.5 s apart to confirm the painting actually moves. Then look
   at one frame per shot side by side: any shot that looks like it came from
   another film gets repainted in the shared style.
-- **The renderer's rules still apply.** `remotion-render-pitfalls` covers
-  ASCII-only code, importing every identifier and inline styles only.
-  `remotion-best-practices` covers Remotion idioms.
+- **The renderer's rules still apply:** ASCII-only code, every identifier
+  imported, inline styles only. Load `remotion-render-pitfalls` too when it is
+  offered; `remotion-best-practices` covers Remotion idioms.
 
 ## What was left out on purpose
 
 - Upstream's Canvas engine, Python render/QA/delivery scripts, music synthesis,
   voice and image-generation setup. The thresholds those scripts enforced live
-  on as design rules in `references/directing.md`.
+  on as design rules in [directing](references/directing.md).
 - Demo characters and mascots, and the shared room composition of upstream's
   art-history demo film.
 - The style cards upstream marks as unvalidated research (38-55), and its

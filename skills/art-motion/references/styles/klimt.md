@@ -20,7 +20,7 @@ px at 1920 wide; scale with the canvas.
 - 420 gold specks flash four-point stars while sin(t*speed + phase) > 0.55 (radius s*(0.6 + 1.1a)), rising 26 px/s; 34 flakes flip (scaleX = cos) and fall 150 px/s; flowers nod sin(4.2t + phase)*0.35r.
 
 ## Signature transition
-Gold leaf: 72px leaves land in spiral order from the subject's head (key = distance*0.78 + angle*0.12 + random*0.08), settling from 1.3x with a small rotation, gradient #a8741e -> moving #fbe6a0 -> #c8962e, embossed with a spiral, eye or circles (rgba(70,40,10,.75), 2.2px); seated leaves fade to reveal the new shot. 0.5 s (15 frames). Custom presentation (see 16_2026.md): entering scene `clipPath: path(...)` of seated tiles, moving tiles as SVG rects.
+Gold leaf: 72px leaves land in spiral order from the subject's head (key = distance*0.78 + angle*0.12 + random*0.08), settling from 1.3x with a small rotation, gradient #a8741e -> moving #fbe6a0 -> #c8962e, embossed with a spiral, eye or circles (rgba(70,40,10,.75), 2.2px); seated leaves fade to reveal the new shot. 0.5 s (15 frames). Custom presentation (see flat-illustration.md): entering scene `clipPath: path(...)` of seated tiles, moving tiles as SVG rects.
 
 ## Pitfalls
 - Canvas source-in per ornament wipes earlier ones; composite all, clip once.

@@ -6,7 +6,7 @@ The story is the star and the picture is its reaction meme: a simple character s
 
 Evoke the grammar; never copy the channel's characters, branding or footage.
 
-This grammar needs a character. Use the brand's character or mascot art: one transparent image per pose (rest, talk, point, shrug, type, stiff, react, back; optional `<pose>_open` mouth-open variants), feet at the bottom centre of each image, at least rest or talk. Without character art, do not improvise a code-drawn bean person as the protagonist: the upstream author judged code-drawn little people and robots an instant "AI look" and disabled them. Keep the rhythm instead (snap and hold, screen insert, smash to the punchline, jump-in) with the product, a phone screen, hands or objects as the protagonist, or pick y5_kinetic_type or y2_vox.
+This grammar needs a character. Use the brand's character or mascot art: one transparent image per pose (rest, talk, point, shrug, type, stiff, react, back; optional `<pose>_open` mouth-open variants), feet at the bottom centre of each image, at least rest or talk. Without character art, do not improvise a code-drawn bean person as the protagonist: the upstream author judged code-drawn little people and robots an instant "AI look" and disabled them. Keep the rhythm instead (snap and hold, screen insert, smash to the punchline, jump-in) with the product, a phone screen, hands or objects as the protagonist, or pick kinetic-type or vox.
 
 ## Use it / avoid it
 
@@ -16,7 +16,7 @@ Use it for:
 - Ads (inferred): relatable-problem skits (problem, failed attempt, the product saves it), customer or founder stories, comedy hooks. One character, 5-6 poses and three mouths can carry a whole piece.
 
 Avoid it for:
-- Dense tutorials or data: viewers watch the character waiting for the joke and forget the numbers (use y5_kinetic_type or t3_finance_chart).
+- Dense tutorials or data: viewers watch the character waiting for the joke and forget the numbers (use kinetic-type or finance-chart).
 - Copy with no "I" (industry news, product comparisons): the character has no stance to perform, only a talking sticker.
 - Copy that is not funny and has no pause: the style amplifies the script, it cannot rescue it.
 

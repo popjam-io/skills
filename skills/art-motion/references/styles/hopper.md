@@ -21,7 +21,7 @@ Dual-version clip: render the scene twice - `<Room lit={false} />`, then `<Absol
 - Barber pole stripes climbing 60 px/s; blind cord sin(4.2t)*0.07 rad; 26 dust motes only inside the light; steam.
 
 ## Signature transition
-Sun shaft: a hard slanted light block (slant 260px) sweeps in from the left with the new shot inside under a warm screen tint rgba(255,214,140,.45) fading over the last 40%; outside, the old shot sinks into shadow (multiply rgba(70,120,110, up to .7)); a 34px mullion shadow 420px behind the edge; bright edge rgba(255,236,190,.8) 6px. Ease 0.4*easeOut + 0.6*easeInOut. 0.34 s (10 frames). Custom presentation (see 16_2026.md): polygon clip, tint/shade divs with mix-blend-mode screen / multiply.
+Sun shaft: a hard slanted light block (slant 260px) sweeps in from the left with the new shot inside under a warm screen tint rgba(255,214,140,.45) fading over the last 40%; outside, the old shot sinks into shadow (multiply rgba(70,120,110, up to .7)); a 34px mullion shadow 420px behind the edge; bright edge rgba(255,236,190,.8) 6px. Ease 0.4*easeOut + 0.6*easeInOut. 0.34 s (10 frames). Custom presentation (see flat-illustration.md): polygon clip, tint/shade divs with mix-blend-mode screen / multiply.
 
 ## Pitfalls
 - Horizontal noise at .35 made walls look like watery marble.

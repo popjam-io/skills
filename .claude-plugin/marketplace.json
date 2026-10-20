@@ -1,6 +1,6 @@
 {
   "name": "popjam",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "owner": {
     "name": "POPJAM",
     "email": "doruk@popjam.io"
@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "popjam-skills",
-      "version": "1.4.0",
+      "version": "1.4.1",
       "description": "Marketing, ads & creative skills: generate ad creatives, segment target audiences, simulate reactions with synthetic personas, build landing pages that convert, reverse-engineer brand guidelines and voice, validate ad-platform safe zones, create art-directed Remotion animations, and avoid Remotion render pitfalls.",
       "source": "./",
       "strict": false,

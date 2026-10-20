@@ -14,8 +14,8 @@ Use it for:
 - A calm, curious, "serious but cute" tone. Source pace: ~168 words/min narration, ~2 sentences per hard-cut shot (measured). In a silent ad: one copy line per visual state.
 
 Avoid it for:
-- Real people, real events, testimonials, press: flat cartoon dilutes credibility (use y2_vox).
-- Step-by-step reasoning (use y3_whiteboard).
+- Real people, real events, testimonials, press: flat cartoon dilutes credibility (use vox).
+- Step-by-step reasoning (use whiteboard).
 - Thin build budgets. The look depends on something moving in every frame (the studio reports 1200+ hours per film (official)); a cut-corner version reads as a cheap slide deck. In an ad, build 1-3 rich scenes rather than many thin ones.
 
 ## Before you start

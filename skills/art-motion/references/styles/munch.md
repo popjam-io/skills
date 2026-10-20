@@ -33,7 +33,7 @@ const warpRows = (ctx: CanvasRenderingContext2D, src: HTMLCanvasElement, t: numb
 - Captions through the same warp; IM Fell English worked, a comic hand (Kalam) broke the mood.
 
 ## Signature transition
-Scream warp: the old shot row-warps with growing amplitude (70e*sin(y*.014 + ph) + 20e*sin(y*.05 - ph)); a wavy front descends (lerp(-180, H + 220, e) + 80*sin(x*.0055 + 7p)); above it the new shot, warp shrinking 60(1 - e); four 26px bands #b82a1e #e2541c #f08a24 #f4c03a ride the front 22px apart; gaps #3a1410. 0.5 s (15 frames). One canvas for both shots, or a custom presentation (see 16_2026.md) with a polygon clip and SVG bands.
+Scream warp: the old shot row-warps with growing amplitude (70e*sin(y*.014 + ph) + 20e*sin(y*.05 - ph)); a wavy front descends (lerp(-180, H + 220, e) + 80*sin(x*.0055 + 7p)); above it the new shot, warp shrinking 60(1 - e); four 26px bands #b82a1e #e2541c #f08a24 #f4c03a ride the front 22px apart; gaps #3a1410. 0.5 s (15 frames). One canvas for both shots, or a custom presentation (see flat-illustration.md) with a polygon clip and SVG bands.
 
 ## Pitfalls
 - Dark outlines and short strokes = Van Gogh: lengthen (10 -> 26+ steps), widen, lower opacity.

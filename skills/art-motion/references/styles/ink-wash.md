@@ -25,7 +25,7 @@ Canvas; px at 1920 wide; scale with the canvas. Order: paper (cached) -> washes 
 - Seal: 1.5 -> 1 over ~3 frames, multiplied on; reversed-out brand initials.
 
 ## Signature transition
-Ink bloom: the old shot washes into paper (grayscale 0 -> 1, brightness 1 -> 1.35, contrast 1 -> 0.7 over the first half); ink blots bleed out in sequence from the brush-down point, each a noise-perturbed circle (radius*(1 + 0.35*noise)) growing to ~1500px*k, the new shot inside; a dark rim rgba(30,26,22,.55*(1 - q)^1.5), ~34px blurred, fades as each blot grows. 0.45 s (14 frames). Custom presentation (see 16_2026.md): CSS filter on the exiting side, `clipPath: path(...)` of the blot union on the entering side, rims in an overlay SVG; blur at 1/4 res.
+Ink bloom: the old shot washes into paper (grayscale 0 -> 1, brightness 1 -> 1.35, contrast 1 -> 0.7 over the first half); ink blots bleed out in sequence from the brush-down point, each a noise-perturbed circle (radius*(1 + 0.35*noise)) growing to ~1500px*k, the new shot inside; a dark rim rgba(30,26,22,.55*(1 - q)^1.5), ~34px blurred, fades as each blot grows. 0.45 s (14 frames). Custom presentation (see flat-illustration.md): CSS filter on the exiting side, `clipPath: path(...)` of the blot union on the entering side, rims in an overlay SVG; blur at 1/4 res.
 
 ## Pitfalls
 - Bristles drawn per segment with round caps knot like rope; one continuous butt-capped path per bristle.

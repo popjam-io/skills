@@ -47,7 +47,7 @@ export const deform = (pts: Pt[], rounds: number, amp: number, seed: string): Pt
 - Clouds 22-30 px/s; canopy sway; flowers nodding; hair streaming in the wind (7 smoothed points); ribbons and cloth hems fluttering.
 
 ## Signature transition
-Bleed on wet paper: five blooms open in sequence (starts 0, .14, .24, .30, .34; radius 1400px x 1, .75, .6, .6, .55; each grows over 66% of the transition) with noisy edges R*(1 + 0.28*noise + 0.05*sin(9a + i)); inside them the new shot. While young, each carries a dark pigment rim (multiply rgba(150,110,70,.6*(1 - q/0.55)^2), 5px, blur 1.2) and a pale washed halo outside (rgba(255,250,236,.6*(1 - q)), 70px, blur 18), both fading as it grows. 0.38 s (11 frames). Custom presentation (see 16_2026.md): `clipPath: path(...)` of the blob union (90 noise2D samples each), rims in an overlay SVG.
+Bleed on wet paper: five blooms open in sequence (starts 0, .14, .24, .30, .34; radius 1400px x 1, .75, .6, .6, .55; each grows over 66% of the transition) with noisy edges R*(1 + 0.28*noise + 0.05*sin(9a + i)); inside them the new shot. While young, each carries a dark pigment rim (multiply rgba(150,110,70,.6*(1 - q/0.55)^2), 5px, blur 1.2) and a pale washed halo outside (rgba(255,250,236,.6*(1 - q)), 70px, blur 18), both fading as it grows. 0.38 s (11 frames). Custom presentation (see flat-illustration.md): `clipPath: path(...)` of the blob union (90 noise2D samples each), rims in an overlay SVG.
 
 ## Pitfalls
 - Blooms at .07 x 4 layers with grain at .5 looked like mouldy parchment; these rooms are bright - .045 x 3 and a lighter gradient.

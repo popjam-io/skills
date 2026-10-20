@@ -23,7 +23,7 @@ Fake it in 2D, or use @remotion/three for real reflections (drei MeshReflectorMa
 Rates suit a 0.23 s shot; halve or quarter them for longer shots.
 
 ## Signature transition
-Wireframe -> render: a #02060a frame fades in over the old shot (first 12%) with a rgba(60,255,150,.8) grid floor (horizon at 59% height, 49 radiating lines, 12 rows spaced by k^2) and the new shot's edges in #3cff96 with an 8px glow; from 30% a scanline sweeps down revealing the rendered shot, led by a 6px rgba(200,255,230,.9) bar. Upstream 0.14 s; 12-20 frames in an ad. Custom presentation (see 16_2026.md): entering `clipPath: inset(0 0 X% 0)`; edges by Sobel on your canvas (half res, gradient > 38) or SVG feConvolveMatrix + feColorMatrix on a copy of the entering scene.
+Wireframe -> render: a #02060a frame fades in over the old shot (first 12%) with a rgba(60,255,150,.8) grid floor (horizon at 59% height, 49 radiating lines, 12 rows spaced by k^2) and the new shot's edges in #3cff96 with an 8px glow; from 30% a scanline sweeps down revealing the rendered shot, led by a 6px rgba(200,255,230,.9) bar. Upstream 0.14 s; 12-20 frames in an ad. Custom presentation (see flat-illustration.md): entering `clipPath: inset(0 0 X% 0)`; edges by Sobel on your canvas (half res, gradient > 38) or SVG feConvolveMatrix + feColorMatrix on a copy of the entering scene.
 
 ## Pitfalls
 - Edges come from the new shot's first frame; it must be complete, not blank or fading in.

@@ -14,8 +14,8 @@ Use it for:
 - Any beat where the viewer needs to see the source with their own eyes.
 
 Avoid it for:
-- Pure concepts with nothing real to paste: it becomes a fake archive (use y1_kurzgesagt or t1_3b1b).
-- Derivations and steps (use y3_whiteboard).
+- Pure concepts with nothing real to paste: it becomes a fake archive (use kurzgesagt or 3blue1brown).
+- Derivations and steps (use whiteboard).
 - Heavy character acting: paper cut-outs only move in steps.
 - Never fabricate evidence (invented press clippings, reviews, receipts, screenshots). Only paste material the brand supplied or that is verifiably real; without it, pick another grammar.
 

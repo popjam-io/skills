@@ -23,7 +23,7 @@ Step in whole art pixels; never tween between them.
 Rates suit the upstream 0.23 s shot; in longer ads step loops at 6-12 fps.
 
 ## Signature transition
-Pixelate: the old shot's blocks grow 1 -> 72px (ease-in), hard cut at the midpoint, the new shot's blocks shrink 72 -> 1. Upstream 0.12 s; 8-12 frames in an ad. Canvas shots: draw into a W/bs x H/bs canvas, scale up with smoothing off. DOM shots: a custom presentation (see 16_2026.md) with an SVG pixelate filter (feFlood 2x2 sample -> feComposite to block size -> feTile -> feComposite in SourceGraphic -> feMorphology dilate block/2), block size updated per frame; verify in a preview.
+Pixelate: the old shot's blocks grow 1 -> 72px (ease-in), hard cut at the midpoint, the new shot's blocks shrink 72 -> 1. Upstream 0.12 s; 8-12 frames in an ad. Canvas shots: draw into a W/bs x H/bs canvas, scale up with smoothing off. DOM shots: a custom presentation (see flat-illustration.md) with an SVG pixelate filter (feFlood 2x2 sample -> feComposite to block size -> feTile -> feComposite in SourceGraphic -> feMorphology dilate block/2), block size updated per frame; verify in a preview.
 
 ## Pitfalls
 - Plan placement on the art-pixel grid; outlines expose overlaps.

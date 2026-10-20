@@ -21,7 +21,7 @@ px at 1920 wide; scale with the canvas. Static layers once (canvas or SVG).
 - Two motions per subject (upstream added a head turn sin(2.6t) and 2.5x breathing).
 
 ## Signature transition
-Apsara ribbons sweep right to left with the new mural behind the front, x = lerp(W + 260, -300, e) + 110*sin(y*.006 + 5p); chips of the old picture flip and fall there (y += age^2*900); three ribbons ride it - #6ab08e, #a5452f, #5a86b0, 44/38/32px, outlined #5a2414 2.4px, white dashed [4,10] centre line. 0.5 s (15 frames). Custom presentation (see 16_2026.md): polygon clip, SVG ribbons; for DOM shots use plaster-coloured chips.
+Apsara ribbons sweep right to left with the new mural behind the front, x = lerp(W + 260, -300, e) + 110*sin(y*.006 + 5p); chips of the old picture flip and fall there (y += age^2*900); three ribbons ride it - #6ab08e, #a5452f, #5a86b0, 44/38/32px, outlined #5a2414 2.4px, white dashed [4,10] centre line. 0.5 s (15 frames). Custom presentation (see flat-illustration.md): polygon clip, SVG ribbons; for DOM shots use plaster-coloured chips.
 
 ## Pitfalls
 - Ribbons swinging 18-34px and hanging vertical read as a chair rail; >200px sideways and an upturned tail read as silk.

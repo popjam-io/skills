@@ -22,7 +22,7 @@ Canvas, or SVG with one `<path>` per colour; not a thousand elements. px at 1920
 - "Self-obliteration" end: red overlay fades in as a 120px hex lattice blooms from the subject to radius 0.47*spacing (~8 frames), holds ~5 frames breathing; ends white dots on red. A strong end-card ground.
 
 ## Signature transition
-Dot bloom: a hex grid (spacing 58) grows from the subject; q = clamp((1.55p - 1.1d - 0.08k)/0.42) (d normalized distance, k random), radius outBack(q)*0.74*spacing; the union reveals the new shot; growing dots get a cream rim rgba(251,246,238,1 - q) 5px. 0.48 s (14 frames). Custom presentation (see 16_2026.md) clipping to circle subpaths.
+Dot bloom: a hex grid (spacing 58) grows from the subject; q = clamp((1.55p - 1.1d - 0.08k)/0.42) (d normalized distance, k random), radius outBack(q)*0.74*spacing; the union reveals the new shot; growing dots get a cream rim rgba(251,246,238,1 - q) 5px. 0.48 s (14 frames). Custom presentation (see flat-illustration.md) clipping to circle subpaths.
 
 ## Pitfalls
 - Random lights with big glows = bokeh mush; a regular lattice reads as infinite.

@@ -23,7 +23,7 @@ px at 1920 wide; scale with the canvas.
 - 9 ants circling a small object on ellipses; soft parts sag (tip y + q^2*34).
 
 ## Signature transition
-Melt: the new shot pours down like paint. Lower edge = falling line lerp(-160, H + 40, e) + 26 round-headed drips (profile (1 - u^2)^0.3, width 10-32, length 60-280px, staggered 0-0.25, each growing over half the transition) + 24*sin(x*.005 + 1). The old shot sags in 4px columns (sag = edge*0.22*e). The edge gets an inner dark band rgba(40,20,10,.35) 9px blurred 3px and a highlight rgba(255,250,232,.7) 3px, 5px above. 0.36 s (11 frames). Custom presentation (see 16_2026.md): polygon clip sampled every 8px, edge strokes in an overlay SVG; for DOM shots swap the column sag for a slight scaleY/translateY.
+Melt: the new shot pours down like paint. Lower edge = falling line lerp(-160, H + 40, e) + 26 round-headed drips (profile (1 - u^2)^0.3, width 10-32, length 60-280px, staggered 0-0.25, each growing over half the transition) + 24*sin(x*.005 + 1). The old shot sags in 4px columns (sag = edge*0.22*e). The edge gets an inner dark band rgba(40,20,10,.35) 9px blurred 3px and a highlight rgba(255,250,232,.7) 3px, 5px above. 0.36 s (11 frames). Custom presentation (see flat-illustration.md): polygon clip sampled every 8px, edge strokes in an overlay SVG; for DOM shots swap the column sag for a slight scaleY/translateY.
 
 ## Pitfalls
 - Shadows cast toward the viewer get cut by the frame; cast them back.

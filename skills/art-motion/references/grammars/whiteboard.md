@@ -18,7 +18,7 @@ Use it for:
 - Ads (inferred): "why X fails and Y works", "how it works in 3 steps", B2B explainers. Without voiceover the handwriting itself is the copy, so keep each written phrase short.
 
 Avoid it for:
-- Precise data charts (hand-drawn error is large; use t3_finance_chart).
+- Precise data charts (hand-drawn error is large; use finance-chart).
 - Complex motion or spatial relations (a whiteboard has no depth).
 - Emotional intensity (monochrome line art is weak there).
 - Expecting better comprehension: a 2016 study (Turkay) found no learning advantage over other formats. Its value is attention and a sense of company (secondary).
