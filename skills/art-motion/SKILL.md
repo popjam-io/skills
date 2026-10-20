@@ -1,6 +1,6 @@
 ---
 name: art-motion
-description: Direct and build art-style and explainer-style motion in Remotion with 35 painterly and graphic style cards (Van Gogh flow-field strokes, Monet water light, Seurat dots, ink wash, Klimt gold, Bauhaus, pop-art halftone, pixel art, vaporwave, Art Nouveau, cubism and more), 8 explainer grammars (kinetic typography, Kurzgesagt-style flat, Vox collage, whiteboard, 3Blue1Brown-style morphs, keynote-style product UI, finance charts, storytime), and camera rules against slideshow-style animation. Use it when an animation should look painted or drawn in a named artist's, movement's or era's style ("make it Van Gogh", "pixel art", "make the painting move"); when it demos a product, app, UI or screen recording, charts real numbers or runs on kinetic text; when it feels like a slideshow, zooms too much or has a dead background; or when moving a style to a new subject. Adapted from huashu-art-motion (MIT).
+description: Direct and build art-style and explainer-style motion in Remotion with 35 painterly and graphic style cards (Van Gogh flow-field strokes, Monet water light, Seurat dots, ink wash, Klimt gold, Bauhaus, pop-art halftone, pixel art, vaporwave, Art Nouveau, cubism and more), 8 explainer grammars (kinetic typography, Kurzgesagt-style flat, Vox collage, whiteboard, 3Blue1Brown-style morphs, keynote-style product UI, finance charts, storytime), and camera rules against slideshow-style animation. Use it when an animation should look painted or drawn in a named artist's, movement's or era's style ("make it Van Gogh", "pixel art", "make the painting move"); when it launches, reveals or demos a product (an Apple-keynote-style reveal, an app or UI walkthrough, a screen recording), charts real numbers or runs on kinetic text; when it feels like a slideshow, zooms too much or has a dead background; or when moving a style to a new subject. Adapted from huashu-art-motion (MIT).
 license: MIT
 metadata:
   author: POPJAM (https://popjam.io)
@@ -36,7 +36,7 @@ cards hold the measured palettes, stroke sizes, timings and known pitfalls. A st
 | The brief or the user says | Read |
 |---|---|
 | A named artist, movement or era, or "make it painterly" | Its style card (list below), then [painting-in-code](references/painting-in-code.md). Unsure which style fits: [the style index](references/styles/INDEX.md) |
-| A product demo, an app or UI walkthrough, a screen recording | [keynote-ui](references/grammars/keynote-ui.md) |
+| A product launch or reveal (Apple-keynote style), a product demo, an app or UI walkthrough, a screen recording | [keynote-ui](references/grammars/keynote-ui.md) |
 | An explainer look, kinetic text, a chart of real numbers | Its grammar card (list below). Unsure which fits: [the grammar index](references/grammars/INDEX.md) |
 | That style on a subject its card wasn't built for, or a style not listed | [style-transfer](references/style-transfer.md) |
 | "Make the painting move", a journey through worlds or styles, a morph between styles | [living-paintings](references/living-paintings.md) and [transitions](references/transitions.md) |
@@ -87,6 +87,14 @@ cards hold the measured palettes, stroke sizes, timings and known pitfalls. A st
   They can sit inside a painted world with a light treatment (shadow, grain, a
   gentle colour grade, a painted frame around them), but they must stay sharp,
   legible and correct. If you need the product cut out, use `remove_background`.
+- **Copy stays readable over paint.** Stroke fields, dots, halftone and other
+  painted grounds never run behind text. Put every line of copy, small print
+  included, on a calm backing (a solid or softly blurred panel in the palette),
+  or clear the marks around it. Check the smallest text in every preview.
+- **A restyle keeps the message.** When you restyle an existing animation, keep
+  every line of copy, product name, label and product image it had. Spread them
+  across more beats (kinetic type) instead of cutting them. Cut something only
+  when the user asks.
 - **Brand palette first.** When the brand defines colours, map them onto the
   style's palette roles (ground, ink or line, accents). Keep the style's value
   structure and mark-making. A brand `visual_style` is still binding for type,
