@@ -27,7 +27,7 @@ existing integration identifier.
 - **Authentication:** OAuth through POPJAM's Supabase-backed authorization
   server. Remote connections authenticate before tools are listed. Configure
   reviewer credentials in the portal; never place them in this repository.
-- **Logo source:** `frontend/apps/web/public/apple-icon.png` (upload the
+- **Logo source:** `frontend/apps/web/public/brand/popjam-app-icon.png` (upload the
   production PNG in the portal; the MCP integration has no custom UI, so do
   not upload UI screenshots).
 
