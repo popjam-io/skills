@@ -22,7 +22,7 @@ existing integration identifier.
 - **Support:** https://popjam.io/support
 - **Privacy policy:** https://popjam.io/privacy
 - **Terms of service:** https://popjam.io/terms
-- **Production MCP URL:** https://api.popjam.io/mcp/
+- **Production MCP URL:** https://api.popjam.io/mcp
 - **MCP URL type:** Universal
 - **Authentication:** OAuth through POPJAM's Supabase-backed authorization
   server. Remote connections authenticate before tools are listed. Configure
@@ -168,7 +168,7 @@ annotations and private-network URL protection across both website-fetch modes.
 
 Public submission does not use a checked-in integration ID. For a local
 ChatGPT smoke test, enable developer mode, register
-`https://api.popjam.io/mcp/`, and copy the generated `plugin_asdk_app...`
+`https://api.popjam.io/mcp`, and copy the generated `plugin_asdk_app...`
 technical ID. Then create a local `.app.json` mapping and reference it from the
 root manifest's `extensions.com.openai.apps` field. Because that ID belongs to
 the registering account, `.app.json` is gitignored; do not invent or commit a

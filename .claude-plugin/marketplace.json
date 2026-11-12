@@ -45,7 +45,7 @@
       "mcpServers": {
         "popjam": {
           "type": "http",
-          "url": "https://api.popjam.io/mcp/"
+          "url": "https://api.popjam.io/mcp"
         }
       }
     }

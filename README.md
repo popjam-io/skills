@@ -84,10 +84,10 @@ These skills run POPJAM's pipelines inside your own agent. If you'd rather call 
 Installing the plugin above already wires it up. To add it standalone in Claude Code:
 
 ```bash
-claude mcp add --transport http popjam https://api.popjam.io/mcp/
+claude mcp add --transport http popjam https://api.popjam.io/mcp
 ```
 
-For Claude Desktop, claude.ai, Cursor, VS Code, and other clients, add `https://api.popjam.io/mcp/` as a remote (streamable-HTTP) MCP server. Authentication is a one-time browser sign-in.
+For Claude Desktop, claude.ai, Cursor, VS Code, and other clients, add `https://api.popjam.io/mcp` as a remote (streamable-HTTP) MCP server. Authentication is a one-time browser sign-in.
 
 Full tool list and setup guides: **[popjam.io/mcp](https://popjam.io/mcp)**
 

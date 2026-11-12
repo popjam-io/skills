@@ -3,7 +3,7 @@
   "mcpServers": {
     "popjam": {
       "type": "streamable-http",
-      "url": "https://api.popjam.io/mcp/"
+      "url": "https://api.popjam.io/mcp"
     }
   }
 }
